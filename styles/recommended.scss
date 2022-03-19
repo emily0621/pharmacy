@@ -1,0 +1,29 @@
+// @import "main.scss";
+
+// .recommendedItems {
+//     h4{
+//         @include mainText(50px);
+//         color: $mainColor;
+//         text-shadow: 0px 10px 8px rgba(0, 0, 0, 0.25);
+//         margin-left: 100px;
+//     }
+//     ul{
+//         height:auto;
+//         padding-left: 2%;
+//         padding-right: 2%;
+//         margin-bottom: 100px;
+//         .link_block{
+//             text-decoration: none;
+//             @include border(5px, 50px);
+//             padding-top: 50px;
+//             width: 400px;
+//             height: 370px;
+//             background-color: $lightColor;
+//             @include mainText(30px);
+//             margin: auto;
+//         } 
+//         a:hover{
+//             background-color: $hoverColor;
+//         }
+//     }
+// }

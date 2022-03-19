@@ -1,0 +1,22 @@
+header #bg1 {
+  background-image: url("/pharmacy/images/background1.svg");
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: 70%;
+  margin: 0px;
+  height: 500px;
+  margin-right: 5%;
+}
+
+header #bg2 {
+  background-image: url("/pharmacy/images/background2.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 110%;
+  margin: 0px;
+  position: relative;
+  height: 600px;
+  margin-top: -150px;
+  background-position: top;
+}
+/*# sourceMappingURL=background.css.map */
