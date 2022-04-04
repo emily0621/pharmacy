@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = stylesheet type= "text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+    <link rel = stylesheet type= "text/css" href="{{ url_for('static',filename='styles/nav.css') }}">
+    <link rel = stylesheet type= "text/css" href="{{ url_for('static',filename='styles/footer.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+    <script src="{{ url_for('static',filename='products.js') }}" type="module"></script>
+    <title>Pharmacy</title>
+</head>
+<body>
+    <nav>
+        <a id="title" href="/pharmacy">Pharmacy</a>
+        <div class="nav_links">
+            <a href="/pharmacy/products" class="text_link">Products</a>
+            <a href="/pharmacy/about" class="text_link">About us</a>
+            <a href="/pharmacy/findUser" class="icon_link">
+                <img src="{{ url_for('static',filename='images/Icon.svg') }}" class="icon" alt="find user">
+            </a>
+            <a href="/pharmacy/findOrder" class="icon_link">
+                <img src="{{ url_for('static',filename='/images/Cart.svg') }}" class="icon" alt="find order">
+            </a>
+            <a href="/pharmacy/addMedicine" class="icon_link">
+                <img src="{{ url_for('static',filename='/images/Tag.svg') }}" class="icon" alt="add med">
+            </a>
+            <a href="/pharmacy/profile" class="icon_link">
+                <img src="{{ url_for('static',filename='/images/userProfile.svg') }}" class="icon" alt="user profile">
+            </a>
+        </div>
+    </nav>
+    <div class="filter_container">
+        <input id="hiden" type="checkbox">
+        <label for="hiden" id="fltr">Filter</label>
+        <div class="usual_div">
+            <div>
+                <input type="text" id="search_text">
+            </div>
+            <div class="filters" id="allFilters">
+                <div class="fltr_container">
+                    <div class="filter_list">
+                        <span class="search_medicine">Categories: </span>
+                        <select multiple class="multiple_select" size="2" id="categorySelect"></select>
+                    </div>
+                    <div class="filter_list">
+                        <span class="search_medicine">Manufacturers: </span>
+                        <select multiple class="multiple_select" size="2" id="manufacturerSelect"></select>
+                    </div>
+                </div>
+                <div class="fltr_container">
+                    <div class="filter_list">
+                        <span class="search_medicine">Order by: </span>
+                        <select class="multiple_select" size="2" id="sortSelect" required>
+                            <option selected>price</option>
+                            <option>manufacturer</option>
+                            <option>category</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn_list" id="search_btn_list">
+                <div>
+                    <input type="checkbox" class="checkbox" id="available_products">
+                    <label for="available_products" class="delete_label">Show only available products</label>
+                </div>
+                <button class="button" id="search">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="container" id="products_container">
+        <div class="itemsList" id="productsitemsList">
+        </div>
+        <div class="btn_list">
+            <button class="button" id="prev_page">< Previous page</button>
+            <button class="button" id="next_page">Next page ></button>
+        </div>
+        <div id="error_search"></div>
+    </div>
+    <footer>
+        <h6>Contact us:</h6>
+        +380000000000<br>
+        pharmacy@gmail.com<br>
+        Lviv, Ukraine
+    </footer>
+</body>
+</html>

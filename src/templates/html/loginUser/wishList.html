@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = stylesheet type= "text/css" href="{{ url_for('static',filename='styles/main.css') }}">
+    <link rel = stylesheet type= "text/css" href="{{ url_for('static',filename='styles/nav.css') }}">
+    <link rel = stylesheet type= "text/css" href="{{ url_for('static',filename='styles/footer.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.js"></script>
+    <script src="{{ url_for('static',filename='wishList.js') }}" type="module"></script>
+    <title>Pharmacy</title>
+</head>
+<body>
+    <nav>
+        <a id="title" href="/pharmacy">Pharmacy</a>
+        <div class="nav_links">
+            <a href="/pharmacy/products" class="text_link">Products</a>
+            <a href="/pharmacy/about" class="text_link">About us</a>
+            <a href="/pharmacy/orders" class="icon_link">
+                <img src="{{ url_for('static',filename='images/shoppingCart.svg') }}" class="icon" alt="shopping cart">
+            </a>
+            <a href="/pharmacy/wish_list" class="icon_link">
+                <img src="{{ url_for('static',filename='images/wishList.svg') }}" class="icon" alt="wish list">
+            </a>
+            <a href="/pharmacy/profile" class="icon_link">
+                <img src="{{ url_for('static',filename='images/userProfile.svg') }}" class="icon" alt="user profile">
+            </a>
+        </div>
+    </nav>
+    <div class="container">
+        <h4>Wish list</h4>
+        <div class="itemsList" id="productsitemsList">
+        </div>
+        <div id="error"></div>
+    </div>
+    <footer>
+        <h6>Contact us:</h6>
+        +380000000000<br>
+        pharmacy@gmail.com<br>
+        Lviv, Ukraine
+    </footer>
+</body>
+</html>
