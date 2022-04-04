@@ -1,0 +1,671 @@
+$mainColor: #5D8E03;
+$hoverColor: #92a371;
+$lightColor: #CFDDB4;
+
+
+html{
+    height: 100%;
+    display: grid;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+    min-height: 100%;
+    display: grid;
+}
+.container{
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.usual_div{
+    @extend body;
+}
+@mixin mainText($size){
+    font-family: 'Poppins';
+    font-size: $size;
+    font-style: normal;
+    color: white;
+}
+@mixin border($size, $radius){
+    border: solid white;
+    border-width: $size;
+    border-radius: $radius;
+}
+@mixin text_link($size){
+    text-decoration: none;
+    @include mainText($size);
+    text-align: center;
+    width: auto;
+}
+@mixin gradientText($size){
+    @include mainText($size);
+    color: $mainColor;
+    background-image: linear-gradient(45deg, $mainColor, black);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; 
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    text-shadow: 0px 10px 8px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.075em;
+    margin: 0px;
+}
+@mixin btn($size){
+    background: $mainColor;
+    border-radius: 150px;
+    @include mainText($size);
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    border: none;
+    color: white;
+}
+@mixin input($size){
+    @include mainText($size);
+    background: #FFFFFF;
+    opacity: 0.8;
+    border-radius: 150px;
+    border: none;
+    outline:none;
+    box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.5);
+    color: #5D8E03;
+}
+@mixin auto{
+    padding: auto;
+    margin: auto;
+    width: auto;
+}
+@mixin block_settings{
+    align-items: center;
+    justify-content: center;
+}
+@mixin center_block{
+    @include block_settings();
+    text-align: center;
+}
+@mixin justify_block {
+    @include block_settings();
+    text-align: justify;
+}
+.user_block:hover{
+    @include border(5px, 50px);
+    background-color: #92a371;
+}
+a{
+    text-decoration: none;
+}
+ul{
+    display: flex;
+    width: auto;
+    margin: 0;
+    padding: 0;
+}
+.button{
+    @include mainText(25px);
+    @include center_block();
+    display: flex;
+    background: $mainColor;
+    border-radius: 150px;
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    border: none;
+    padding: 15px 25px 15px 25px;
+    margin: 10px;
+}
+.button:hover{
+    background: $hoverColor;
+    font-size: 30px;
+}
+#main_button{
+    position: absolute;
+    margin: 0;
+    font-size: 25px;
+    height: 69px;
+    padding: 0 10px 0 10px;
+}
+#main_button:hover{
+    background: $hoverColor;
+    font-size: 23px;
+    width: 118.1px;
+}
+.link_block:hover{
+    background-color: $hoverColor;
+    width: 420px;
+    height: 380px;
+    font-size: 30px;
+}
+.itemsList .link_block:hover{
+    height: 40px;
+    width: 420px;
+    font-size: 25px;
+}
+.link_block:hover .product_image{
+    width: 350px;
+}
+.items_list{
+    @include justify_block();
+    display: flex;
+    height: auto;
+}
+.product_image{
+    @include border(5px, 100px);
+    width: 300px;
+    object-fit: contain; 
+    margin-bottom: 10px;
+}
+.link_block{
+    @include mainText(25px);
+    @include border(5px, 50px);
+    @include center_block();
+    display: inline-flex;
+    flex-direction: column;
+    background-color: $lightColor;
+    padding: 40px 20px 40px 20px;
+    margin: auto;
+    width: 400px;
+    -webkit-transition: 1s ease;
+}
+.text_link:hover{
+    font-size: 23px;
+}
+.container{
+    h4{
+        text-align: center;
+        @include gradientText(40px);
+        margin-bottom: 90px;
+    }
+}
+.information{
+    @include border(5px, 50px);
+    @include center_block();
+    background-color: #CFDDB4;
+    display: flex;
+    width: max-content;
+    margin: auto;
+    .inf_list{
+        @include mainText(20px);
+        padding: 50px;
+        height: auto;
+        display: inline-block;
+        .value{
+            display: flex;
+            margin-bottom: 10px;
+        }
+        .property{
+            @extend .value;
+            color: $mainColor;
+        }
+        input{
+            @include input(20px);
+            @extend .value;
+            padding-left: 20px;
+        }
+        .value_reg{
+            @extend input;
+            width: 310px;
+        }
+        ::-webkit-calendar-picker-indicator {
+            color: transparent;
+            opacity: 1;
+            background-color: #5D8E03;
+            border: solid white;
+            border-width: 5px;
+            border-radius: 50px;
+            background-size: contain;
+        }
+        input[type="date"]::before{
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+            color: $mainColor;
+        }
+        input[type="date"]{
+            @include mainText(20px);
+            color: $mainColor;
+        }
+        // input[type="date"]:before {
+        //     color: lightgrey;
+        //     content: attr(placeholder) !important;
+        //     margin-right: 0.5em;
+        //   }
+          input[type="date"]::before {
+            color: #999999;
+            content: attr(placeholder);
+        }
+        input[type="date"] {
+            @include mainText(20px);
+            color: #ffffff;
+        }
+        input[type="date"]:focus,
+        input[type="date"]:valid {
+            @include mainText(20px);
+            color: #666666;
+        }
+        input[type="date"]:focus::before,
+        input[type="date"]:valid::before {
+            @include mainText(20px);
+            content: "" !important;
+        }
+    }
+}
+.btn_list{
+    @include text_link(20px);
+    @include justify_block();
+    display: flex;
+}
+.user_list{
+    display: flex;
+    flex: auto;
+    flex-wrap: wrap;
+    text-align: start;
+    align-items:center;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: auto;
+    margin: auto;
+    .information{
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+        align-items:center;
+        flex-grow: initial;
+        width: auto;
+        margin: auto;
+        margin-bottom: 50px;
+        .inf_list{
+            margin-left: auto;
+            display: block;
+            width: auto;
+        }
+    }
+    .user_block{
+        display: flex;
+    }
+    .property{
+        display: inline-block;
+        width: auto;
+        white-space: nowrap;
+    }
+}
+#hiden, #hiden + label ~ .usual_div {
+    display: none; 
+}
+#hiden:checked + label{
+    @include gradientText(30px);
+}
+#hiden:checked ~ .usual_div{
+    display: flex;
+    flex-direction: column;
+    font-size: 30px;
+}
+.filter_container{
+    display: block;
+    text-align: center;
+    @extend .container;
+    padding-left: 5%;
+    #fltr{
+        @include mainText(30px);
+        @include auto();
+        display: flex;
+        text-align: left;
+        color: $mainColor;
+    }
+}
+.multiple_select{
+    display: block;
+}
+.filters{
+    @include center_block();
+    @include auto();
+    width: 1000px;
+    margin-left: 100px;
+    // display: flex;
+    // margin: auto;;
+    height: auto;
+}
+.fltr_container{
+    @include center_block();
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 400px;
+    background-color: $lightColor;
+    @include border(5px, 50px);
+    .filter_list{
+        @include auto();
+        @include center_block();
+        display: flex;
+        margin: 20px 0 20px 0;
+        li{
+            @include mainText(20px);
+            display: inline-block;
+            margin: 0px;
+            padding: 10px;
+            width: auto;
+        }
+    }
+}
+select{
+    @include border(1px, 10px);
+    background-color: $hoverColor;
+    border-color: $hoverColor;
+    padding: 5px 10px 5px 10px;
+    option{
+        @include mainText(15px);
+        @include border(1px, 14px);
+        border-color: $hoverColor;
+    }
+    
+}
+select::-webkit-scrollbar {
+    width: 0;
+}
+select option:checked{
+    background-color: $mainColor;
+}
+.usual_div{
+    input{
+        @include input(20px);
+        padding-left: 10px;
+    }
+    text-align: center;
+}
+#inputfile{
+    position: absolute;
+    visibility: hidden;
+}
+#inputfile + label{
+    cursor: pointer;
+}
+#medLabel{
+    @include btn(20px);
+    padding: 5px;
+}
+#inputfile + label * {
+	pointer-events: none;
+}
+p{
+    display: block;
+    @include mainText(30px);
+    text-align: left;
+    padding-left: 20px;
+}
+.single_information{
+    @extend .information;
+    padding: 20px;
+    a{
+        @include text_link(20px);
+    }
+}
+.button_image{
+    width: 20px;
+}
+.itemsList{
+    @extend ul;
+    text-align: center;
+    margin: 70px 50px 100px 50px;
+}
+#shopping_cart{
+    display: flex;
+    flex-direction: column;
+    a{
+    margin-bottom: 100px;
+    }
+}
+.order{
+    @extend .itemsList;
+    display: inline-flex;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+    a{
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+}
+.number, .s{
+    display: none;
+}
+.checkbox:checked ~ .number{
+    @include border(5px, 50px);
+    @include mainText(20px);
+    display: block;
+    background-color: $mainColor;
+    border: none;
+    text-align: center;
+};
+.checkbox:checked ~ .s{
+    @include mainText(25px);
+    display: block;
+    color: $mainColor;
+    margin-right: 20px;
+}
+// input[type='checkbox']:after{
+//     line-height: 1.5em;
+//     content: '';
+//     display: inline-block;
+//     width: 18px;
+//     height: 18px;
+//     // margin-top: -4px;
+//     // margin-left: -4px;
+//     border: 1px solid rgb(192,192,192);
+//     border-radius: 0.25em;
+//     background: $mainColor;
+// }
+
+input[type='checkbox']:checked:after {
+    width: 15px;
+    height: 15px;
+    background-color: $hoverColor;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+textarea:focus, input:focus{
+    outline: none;
+}
+#order_ul{
+    @include center_block();
+    @include auto();
+    display: inline-flex;
+    #search{
+        @include auto();
+        text-align: center;
+        margin-right: 30px;
+    }
+    .text_link{
+        @include text_link(20px);
+        display: flex;
+        padding: auto;
+    }
+}
+.delete_label{
+    color: $mainColor;
+    margin-left: 10px;
+}
+.recommendedItems{
+    h4{
+        @include mainText(50px);
+        color: $mainColor;
+        text-shadow: 0px 10px 8px rgba(0, 0, 0, 0.25);
+        margin-left: 100px;
+    }
+    margin-bottom: 100px;
+}
+.flex_items{
+    @extend ul;
+    margin: 0px 30px 100px 30px;
+}
+.button_small{
+    @extend .button;
+    display: inline-flex;
+    align-items: center;
+}
+.button_small:hover{
+    font-size: 22px;
+}
+#button_small_icon{
+    padding: 5px 10px 5px 10px;
+    width: auto;
+    align-items: center;
+    .button_image{
+        width: 40px;
+    }
+}
+#button_small_icon:hover .button_image{
+    width: 45px;
+}
+.search_medicine{
+    @extend li;
+}
+#error{
+    @include center_block();
+    @include border(5px, 50px);
+    border: none;
+    display: none;
+    margin: 50px 100px 50px 100px;
+    padding: 40px;
+    opacity: 0.8;
+    background-color: darkred;
+    text-shadow: 0px 10px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.5);
+    @include mainText(20px);
+}
+
+#orderInf{
+    display: flex;
+    flex-direction: column;
+    row-gap: auto;
+    height: 300px;
+}
+
+// #orderInf:hover{
+//     border: none;
+//     background-color: $lightColor;
+// }
+
+#orders_list{
+    display: flex;
+    margin-top:100px;
+    margin-bottom: 100px;
+    text-align: center;
+    justify-content: space-around;
+    // margin: auto;
+    row-gap: 50px;
+    .information{
+        display: block;
+        width: 470px;
+        height: 300px;
+        text-align: center;
+        padding: auto;
+        margin: auto;
+        margin-left: 0;
+        margin-right: 0;
+        // margin-bottom: 30px;
+        -webkit-transition: 1s ease;
+    }
+    .information:hover{
+        background-color: $hoverColor;
+        width: 470px;
+        height: 330px;
+        .order_number_class{
+            margin-top: auto;
+            color: white;
+            transition: color 0.5s;
+        }
+    }
+}
+
+#productsitemsList{
+    display: flex;
+    flex-wrap: wrap;
+    text-align: center;
+    height: 400px;
+    height: auto;
+    .link_block{
+        height: 400px;
+        margin-bottom: 20px;
+        -webkit-transition: 1s ease;
+    }
+}
+#recommendedMedicine{
+    @extend #productsitemsList
+}
+
+#products_container{
+    height: auto;
+}
+
+#allFilters{
+    margin: 0;
+}
+
+#available_products::after{
+    display: block;
+    // top: -20px;
+    width: 18px;
+    height: 18px;
+}
+#available_products:checked::after{
+    display: block;
+    // top: -20px;
+    width: 15px;
+    height: 15px;
+}
+#search_btn_list{
+    flex-direction: column;
+}
+#medicine_link{
+    height: 450px;
+}
+#error_search{
+    @extend #error;
+    margin-bottom: 250px;
+}
+#orderInf{
+    pointer-events: none;
+}
+#orderInfdiv{
+    display: inline-flex;
+    margin-top: auto;
+    margin-bottom: auto;
+    .inf_list{
+        padding-top: 0px;
+        padding-bottom: auto;
+    }
+    #property{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    #value_list{
+        max-width: 400px;
+        .value{
+            text-align: left
+        }
+    }
+}
+.order_number_class{
+    @include mainText(35px);
+    color: $mainColor;
+    margin: 0px;
+    margin-bottom: 20px;
+}
+#orderInfdiv{
+    .inf_list{
+        padding-bottom: 10px;
+    }
+}
+#inf_order_list{
+    display: block;
+    height: auto;
+    #orderInf{
+        height: auto;
+    }
+}
+:hover{
+    transition-delay: 0.2s;
+    transition: all 0.5s ease-in-out;
+}
