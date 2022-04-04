@@ -1,0 +1,22 @@
+@import "main.css";
+
+footer{
+    @include mainText(15px);
+    background-color: $mainColor;
+    padding-left: 100px;
+    padding-bottom: 10px;
+    position: absolute;
+    margin-bottom: 0px;
+    top:auto;
+    bottom: 0;
+    h6{
+        @include mainText(20px);
+        margin: 0px;
+        padding: 0px;
+        margin-bottom: 10px;
+        padding-top: 10px;
+    }
+}
+.about{
+    height: auto;
+}
