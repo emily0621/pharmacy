@@ -1,0 +1,17 @@
+<app-guest-nav></app-guest-nav>
+<div class="base_page">
+    <h3 class="base_title">Registration</h3>
+    <div class="base_container">
+        <app-input-field name_field="Username: "></app-input-field>
+        <app-input-field name_field="First name: "></app-input-field>
+        <app-input-field name_field="Last name: "></app-input-field>
+        <app-input-field name_field="Email: "></app-input-field>
+        <app-input-field name_field="Phone: "></app-input-field>
+        <app-input-field name_field="Date of birth: "></app-input-field>
+        <app-input-field name_field="Password: " type_field="password"></app-input-field>
+        <app-input-field name_field="Confirm password: " type_field="password"></app-input-field>
+    </div>
+    <button type="submit" class="base_button" (click)="register()">Register</button>
+    <ng-container [ngIf]="hasError" *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>
+</div>
+<app-footer></app-footer>

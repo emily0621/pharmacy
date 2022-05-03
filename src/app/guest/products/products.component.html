@@ -1,0 +1,46 @@
+<app-nav></app-nav>
+<input type="checkbox" id="filter_checkbox" (change)="check()">
+<label for="filter_checkbox" class="filter_label">Filter</label>
+<div class="filter" *ngIf="showFilter">
+  <input type="text" class="search_field" [(ngModel)]="searchField">
+  <div class="block">
+    <div class="concrete_filter">
+     <label for="category_select">Categories:</label>
+      <select class="search_select" id="category_select" multiple size="2" [(ngModel)]="selectedCategories">
+        <option *ngFor='let category of categories' [ngValue]="category.name_category">{{category.name_category}}</option>
+      </select>
+    </div>
+    <div class="concrete_filter">
+      <label for="manufacturer_select">Manufacturers:</label>
+      <select class="search_select" id="manufacturer_select" multiple size="2" [(ngModel)]="selectedManufacturers">
+        <option *ngFor='let manufacturer of manufacturers' [ngValue]="manufacturer">{{manufacturer}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="block">
+    <div class="concrete_filter">
+      <label for="order_select">Order by:</label>
+      <select class="search_select" id="order_select" size="2" [(ngModel)]="selectedOrder">
+        <option *ngFor='let order of orders' [ngValue]="order">{{order}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="button_list" id="search_button_list">
+    <div class="available_block">
+      <input type="checkbox" id="only_available" [checked]="available" (change)="changeAvailable()">
+      <label for="only_available" id="available_label">Show only available medicine</label>
+    </div>
+    <button class="base_button" type="submit" (click)="newSearch()">Search</button>
+  </div>
+</div>
+<div [ngClass]="'products'">
+  <ng-container *ngFor='let medicine of simpleMedicine'>
+    <ng-container *ngComponentOutlet="component; injector: medicine"></ng-container>
+  </ng-container>
+</div>
+<ng-container *ngComponentOutlet="messageComponent; injector: messageInjector"></ng-container>
+<div class="button_list">
+  <button class="base_button" *ngIf="hasPrev" (click)="previousPage()">Previous page</button>
+  <button class="base_button" *ngIf="hasNext" (click)="nextPage()">Next page</button>
+</div>
+<app-footer></app-footer>

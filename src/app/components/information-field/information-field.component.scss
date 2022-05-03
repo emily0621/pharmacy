@@ -1,0 +1,23 @@
+@import '/src/styles.scss';
+
+p{
+    @include mainText(20px);
+    margin: auto;
+    margin-right: 0;
+    padding-right: 40px;
+}
+label{
+    @include mainText(20px);
+    color: $mainColor;
+    margin: auto;
+    margin-left: 0;
+    padding-left: 40px;
+}
+p, label{
+    display: flex;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    height: auto;
+    width: auto;
+}

@@ -1,0 +1,15 @@
+<app-nav></app-nav>
+<div class="base_page">
+    <h3 class="base_title">Result</h3>
+    <div [ngClass]="'users'">
+      <ng-container *ngFor='let user of userInjectors'>
+        <ng-container *ngComponentOutlet="component; injector: user"></ng-container>
+      </ng-container>
+    </div>
+</div>
+<div class="button_list">
+  <button class="base_button" *ngIf="hasPrev" (click)="getPrevPage()">Previous page</button>
+  <button class="base_button" *ngIf="hasNext" (click)="getNextPage()">Next page</button>
+</div>
+<ng-container [ngIf]="hasError" *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>
+<app-footer></app-footer>

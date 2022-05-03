@@ -1,0 +1,15 @@
+@import '/src/app/components/input-field/input-field.component.scss';
+
+:host label{
+    margin-left: 0;
+    background-color: aqua;
+}
+.base_button {
+    margin-bottom: 50px;
+}
+.base_container{
+    :host label{
+        margin-left: 0;
+        background-color: aqua;
+    }
+}

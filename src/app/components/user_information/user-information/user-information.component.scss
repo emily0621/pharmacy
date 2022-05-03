@@ -1,0 +1,8 @@
+@import '/src/styles.scss';
+
+.inf_container{
+  @include addTransition();
+  @extend .base_container;
+  width: 500px;
+  padding: 20px;
+}

@@ -1,0 +1,5 @@
+@import "../../guest/products/products.component.scss";
+
+.users{
+  @extend .products;
+}

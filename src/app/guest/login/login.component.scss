@@ -1,0 +1,34 @@
+@import 'src/styles.scss';
+
+app-input-field {
+    display: block;
+    position: relative;
+    margin-bottom: 50px;
+}
+
+app-footer{
+    position: relative;
+    bottom: 0;
+}
+
+#registration_link {
+    display: flex;
+    justify-content: center;
+    width: auto;
+    margin: auto;
+    h5{
+        @include mainText(20px);
+        color: $mainColor;
+        margin: auto;
+        margin-top: 30px;
+        margin-bottom: 50px;
+        width: auto;
+        text-decoration: underline;
+        @include addTransition;
+    }
+}
+
+#registration_link h5:hover {
+    font-size: 23px;
+    color: $hoverColor;
+}

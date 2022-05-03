@@ -1,0 +1,17 @@
+@import 'src/styles.scss';
+
+footer{
+    background-color: $mainColor;
+    padding-left: 100px;
+    @include mainText(15px);
+    padding-bottom: 10px;
+    position: relative;
+    bottom: 0px;
+    h6{
+        @include mainText(20px);
+        margin: 0px;
+        padding: 0px;
+        margin-bottom: 10px;
+        padding-top: 10px;
+    }
+}

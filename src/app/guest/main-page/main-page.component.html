@@ -1,0 +1,26 @@
+<app-nav></app-nav>
+<header>
+  <div id="background1">
+    <h3>Be healthy</h3>
+    <h5>Buy fast and cheap</h5>
+    <div class="search">
+      <input type="text" [(ngModel)]="searchInput">
+      <button class="base_button" id="search_button" (click)="search()">Search</button>
+    </div>
+  </div>
+  <div  class="advantages" id="background2">
+    <p>Different manufacturers</p>
+    <p>Low prices</p>
+    <p>Quick delivery</p>
+  </div>
+</header>
+<div class="recommended_block">
+  <h4>Recommended Items</h4>
+  <div [ngClass]="'recommended_medicine'">
+    <ng-container *ngFor='let medicine of simpleMedicine'>
+      <ng-container *ngComponentOutlet="component; injector: medicine"></ng-container>
+    </ng-container>
+  </div>
+</div>
+<app-footer></app-footer>
+

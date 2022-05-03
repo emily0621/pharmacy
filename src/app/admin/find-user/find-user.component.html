@@ -1,0 +1,18 @@
+<app-nav></app-nav>
+<div class="base_page">
+    <h3 class="base_title">Find user</h3>
+    <div class="base_container">
+      <app-input-field name_field="Username: "></app-input-field>
+      <app-input-field name_field="First name: "></app-input-field>
+      <app-input-field name_field="Last name: "></app-input-field>
+      <app-input-field name_field="Email: "></app-input-field>
+      <app-input-field name_field="Phone: "></app-input-field>
+      <app-input-field name_field="Date of birth: "></app-input-field>
+    </div>
+    <div class="button_list">
+        <button class="base_button" (click)="find()">Find</button>
+    </div>
+    <ng-container [ngIf]="hasError" *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>
+</div>
+<app-footer></app-footer>
+

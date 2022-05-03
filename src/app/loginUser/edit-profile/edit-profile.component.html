@@ -1,0 +1,18 @@
+<app-nav></app-nav>
+<div class="base_page">
+    <h3 class="base_title">Edit profile</h3>
+    <div class="base_container">
+      <app-input-field name_field="Username: " [placeholder]='username'></app-input-field>
+      <app-input-field name_field="First name: " [placeholder]='firstName'></app-input-field>
+      <app-input-field name_field="Last name: " [placeholder]='lastName'></app-input-field>
+      <app-input-field name_field="Email: " [placeholder]='email'></app-input-field>
+      <app-input-field name_field="Phone: " [placeholder]='phone'></app-input-field>
+      <app-input-field name_field="Date of birth: " [placeholder]='dateOfBirth'></app-input-field>
+    </div>
+    <div class="button_list">
+        <button class="base_button" (click)="edit()">Submit</button>
+        <button class="base_button" (click)="cancel()">Cancel</button>
+    </div>
+    <ng-container [ngIf]="hasError" *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>
+</div>
+<app-footer></app-footer>

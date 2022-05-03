@@ -1,0 +1,13 @@
+<app-nav></app-nav>
+<div class="base_page">
+    <h3 class="base_title">Login</h3>
+    <app-input-field name_field="Username: "></app-input-field>
+    <app-input-field name_field="Password: " type_field="password"></app-input-field>
+    <button type="submit" class="base_button" (click)="login()">Log in</button>
+    <a id="registration_link" href="/registration">
+        <h5>Registration</h5>
+    </a>
+</div>
+<app-base-error [ngIf]="hasError" *ngComponentOutlet="errorComponent; injector: errorMessage"></app-base-error>
+<app-footer></app-footer>
+

@@ -1,0 +1,11 @@
+@import 'src/styles.scss';
+
+p{
+  @include addTransition();
+  @include mainText(25px);
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+.price{
+  margin-top: 0;
+}

@@ -1,1 +1,180 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@1,700&display=swap');
+
+$mainColor: #5D8E03;
+$hoverColor: #92a371;
+$lightColor: #CFDDB4;
+
+html{
+    display: grid;
+    min-height: 100%;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+    min-height: 100%;
+}
+@mixin base_page_style {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+app-login, app-registration, app-user-profile, app-products, app-users{
+    @include base_page_style()
+}
+
+app-input-field, app-information-field{
+    display: flex;
+    width: auto;
+    justify-content: space-between;
+}
+
+@mixin border($size, $radius){
+    border: solid white;
+    border-width: $size;
+    border-radius: $radius;
+}
+
+@mixin mainText($size){
+    font-family: 'Poppins';
+    font-size: $size;
+    font-style: normal;
+    color: white;
+}
+
+@mixin zero(){
+    padding: 0;
+    margin: 0;
+}
+
+@mixin gradientText($size){
+    @include mainText($size);
+    color: $mainColor;
+    background-image: linear-gradient(45deg, $mainColor, black);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
+    text-shadow: 0px 10px 8px rgba(0, 0, 0, 0.5);
+    letter-spacing: 0.075em;
+    margin: 0px;
+}
+
+@mixin addTransition{
+    -webkit-transition: 0.7s ease;
+}
+
+:hover{
+    transition-delay: 0.1s;
+    transition: all 0.3s ease-in-out;
+}
+
+a {
+    text-decoration: none;
+}
+
+.base_page {
+    text-align: center;
+    .base_title {
+        @include gradientText(50px);
+        margin-top: 40px;
+        margin-bottom: 40px;
+    }
+}
+.button_list{
+    margin-bottom: 40px;
+}
+
+.base_button {
+    background: $mainColor;
+    border-radius: 150px;
+    @include mainText(25px);
+    line-height: 22px;
+    letter-spacing: 0.05em;
+    border: none;
+    color: white;
+    padding: 15px 25px 15px 25px;
+    margin: 10px;
+    @include addTransition();
+}
+.base_button:hover {
+    font-size: 20px;
+    background-color: $hoverColor;
+}
+
+.base_container {
+    display: block;
+    width: 550px;
+    margin: auto;
+    @include border(5px, 50px);
+    background-color: $lightColor;
+    padding: 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.product_image{
+  @include addTransition();
+  @include border(5px, 100px);
+  text-align: center;
+  width: 300px;
+  height: 200px;
+  // object-fit: contain;
+  margin-bottom: 10px;
+  object-fit: cover
+}
+
+app-simple-medicine{
+  @include addTransition();
+  @include border(5px, 50px);
+  height: auto;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 430px;
+  margin: auto;
+  flex-direction: column;
+  background-color: $lightColor;
+  padding: 40px 0px 20px 0px;
+}
+app-simple-medicine:hover{
+  background-color: $hoverColor;
+  width: 450px;
+
+  .product_image{
+    width: 320px;
+    height: 220px;
+  }
+  p{
+    font-size: 30px;
+    letter-spacing: 0.15em;
+  }
+}
+
+app-input-field{
+  margin-top: 10px;
+}
+
+.products{
+  app-simple-medicine{
+    width: 400px;
+  }
+  app-simple-medicine:hover{
+    width: 420px;
+  }
+}
+
+.inf_container:hover{
+  background-color: $hoverColor;
+  width: 550px;
+  label{
+    @include addTransition();
+    font-size: 23px;
+  }
+  p{
+    @include addTransition();
+    font-size: 23px;
+  }
+}

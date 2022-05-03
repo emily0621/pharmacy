@@ -1,0 +1,19 @@
+<app-nav></app-nav>
+<div class="base_page">
+    <h3 class="base_title">{{username}}</h3>
+    <div class="base_container">
+        <app-information-field name_field="Username:" [value_field]="username"></app-information-field>
+        <app-information-field name_field="First name:" [value_field]="firstName"></app-information-field>
+        <app-information-field name_field="Last name:" [value_field]="lastName"></app-information-field>
+        <app-information-field name_field="Email:" [value_field]="email"></app-information-field>
+        <app-information-field name_field="Phone:" [value_field]="phone"></app-information-field>
+        <app-information-field name_field="Date of birth:" [value_field]="dateOfBirth"></app-information-field>
+    </div>
+    <div class="button_list">
+        <button class="base_button" (click)="editProfile()">Edit profile</button>
+        <button class="base_button" (click)="changePassword()">Change password</button>
+        <button class="base_button" (click)="logout()">Log out</button>
+    </div>
+    <ng-container [ngIf]="hasSuccess" *ngComponentOutlet="successComponent; injector: successInjector"></ng-container>
+</div>
+<app-footer></app-footer>
