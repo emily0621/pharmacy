@@ -98,14 +98,7 @@ select::-webkit-scrollbar {
     align-items: center;
   }
 }
-.products{
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  margin-top: 50px;
-  margin-bottom: 50px;
-  row-gap: 50px;
-}
+
 .button_list{
   display: flex;
   justify-content: center;

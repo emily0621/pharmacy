@@ -1,4 +1,6 @@
-import { Component, Inject, Injector, Input, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, Inject, Injector, Input, OnInit, HostListener } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { InputValuesIntoSimpleMedicine } from 'src/app/guest/main-page/main-page.component';
 
 @Component({
@@ -8,13 +10,26 @@ import { InputValuesIntoSimpleMedicine } from 'src/app/guest/main-page/main-page
 })
 export class SimpleMedicineComponent implements OnInit {
 
+  @HostListener('click')
+  navigateToMedicine(){
+    console.log('event')
+    console.log(event)
+    console.log(this.id)
+    this.router.navigate(['/medicine_page/' + this.id], {relativeTo: this.route})
+  }
+
+  id: number
   image: string;
   name: string;
   price: string | null = null
   available: string | null = null
 
-  constructor(private injector: Injector){
-    console.log(injector.get(InputValuesIntoSimpleMedicine))
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private injector: Injector){
+    console.log("INJECTOR: ", injector.get(InputValuesIntoSimpleMedicine))
+    this.id = injector.get(InputValuesIntoSimpleMedicine).id
     this.image = '/static/images/medsImg/' + injector.get(InputValuesIntoSimpleMedicine).image + '.png'
     this.name = injector.get(InputValuesIntoSimpleMedicine).name
     if (injector.get(InputValuesIntoSimpleMedicine).price == undefined) this.price = null

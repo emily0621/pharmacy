@@ -33,6 +33,7 @@
     <button class="base_button" type="submit" (click)="newSearch()">Search</button>
   </div>
 </div>
+<ng-container [ngIf]="afterDelete" *ngComponentOutlet="deleteComponent; injector: deleteInjector"></ng-container>
 <div [ngClass]="'products'">
   <ng-container *ngFor='let medicine of simpleMedicine'>
     <ng-container *ngComponentOutlet="component; injector: medicine"></ng-container>

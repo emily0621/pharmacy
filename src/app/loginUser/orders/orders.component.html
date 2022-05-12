@@ -1,0 +1,19 @@
+<app-nav></app-nav>
+<div class="base_page">
+  <h3 class="base_title">Your orders</h3>
+  <ng-container [ngIf]="hasMessage" *ngComponentOutlet="messageComponent; injector: messageInjector"></ng-container>
+  <div class="order">
+    <ng-container *ngFor="let order of orderInjectors">
+      <ng-container *ngComponentOutlet="orderComponent; injector: order"></ng-container>
+    </ng-container>
+  </div>
+  <div class="button_list">
+    <button class="base_button" *ngIf="hasPrev" (click)="previousPage()">Previous page</button>
+    <button class="base_button" *ngIf="hasNext" (click)="nextPage()">Next page</button>
+  </div>
+  <div class="button_list">
+    <button class="base_button" (click)="newOrder()">New order</button>
+  </div>
+</div>
+<app-footer></app-footer>
+

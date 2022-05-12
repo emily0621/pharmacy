@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { BaseErrorComponent, ErrorMessage } from 'src/app/components/base-error/base-error.component';
 import { SimpleMedicineComponent } from 'src/app/components/medicine/simple-medicine/simple-medicine.component';
+import { Role } from 'src/app/role';
 import { InputValuesIntoSimpleMedicine } from '../main-page/main-page.component';
 
 @Component({
@@ -36,6 +37,11 @@ export class ProductsComponent implements OnInit {
   messageComponent: Type<any>
   messageInjector: Injector
 
+  deleteComponent: Type<any>
+  deleteInjector: Injector
+  afterDelete: boolean = false
+  delete: string | null = null
+
   constructor(
     private http: HttpClient,
     private auth: AuthService,
@@ -59,6 +65,7 @@ export class ProductsComponent implements OnInit {
       this.manufacturers = response
     })
     this.resolveParams().then(() => {
+      this.checkDelete()
       let data = {
         'name_medicine': this.searchField,
         'categories': this.selectedCategories,
@@ -76,7 +83,7 @@ export class ProductsComponent implements OnInit {
           let count = response.count
           this.simpleMedicine = new Array<Injector>()
           this.medicine.forEach((medicine: any) => {
-            let inj: Injector = Injector.create([{provide: InputValuesIntoSimpleMedicine, useValue: {image: medicine.image, name: medicine.name_medicine, price: medicine.price, available: medicine.stock_number}}], this.injector)
+            let inj: Injector = Injector.create([{provide: InputValuesIntoSimpleMedicine, useValue: {id: medicine.id_medicine, image: medicine.image, name: medicine.name_medicine, price: medicine.price, available: medicine.stock_number}}], this.injector)
             console.log(inj.get(InputValuesIntoSimpleMedicine))
             this.simpleMedicine.push(inj)
           })
@@ -84,6 +91,22 @@ export class ProductsComponent implements OnInit {
           this.hasNextPage()
         }
       })
+    })
+  }
+
+  checkDelete(){
+    this.auth.checkUser().then(() => {
+      if (this.auth.getUser().role == Role.provisor && this.delete != null){
+        console.log(this.delete)
+        console.log(typeof(this.delete))
+        this.afterDelete = true
+        this.deleteComponent = BaseErrorComponent
+        let values
+        if (this.delete === 'true') values = {message: 'Successfully deleted', type: true}
+        else values = {message: 'Something went wrong. Not deleted.', type: false}
+        this.deleteInjector = Injector.create([{provide: ErrorMessage, useValue: values}], this.injector)
+        console.log(this.deleteInjector.get(ErrorMessage))
+      }
     })
   }
 
@@ -96,6 +119,7 @@ export class ProductsComponent implements OnInit {
         if (params['order']) this.selectedOrder = params['order']
         if (params['available']) this.available = params['available']
         if (params['page']) this.page = parseInt(params['page'])
+        if (params['deleted']) this.delete = params['deleted']
         resolve()
       })
     })
@@ -116,6 +140,11 @@ export class ProductsComponent implements OnInit {
       page: this.page
     }
     this.router.navigate(['/products'], {queryParams: params, relativeTo: this.route})
+  }
+
+  medicinePage(event: any){
+    console.log("click")
+    console.log(event)
   }
 
   displayError(){

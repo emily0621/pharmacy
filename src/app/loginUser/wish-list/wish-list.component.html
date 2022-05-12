@@ -1,0 +1,15 @@
+<app-nav></app-nav>
+<div class="base_page">
+  <h3 class="base_title">Wish list</h3>
+  <div [ngClass]="'products'">
+    <ng-container *ngFor='let medicine of simpleMedicine'>
+      <ng-container *ngComponentOutlet="component; injector: medicine"></ng-container>
+    </ng-container>
+  </div>
+  <ng-container *ngComponentOutlet="messageComponent; injector: messageInjector"></ng-container>
+  <div class="button_list">
+    <button class="base_button" *ngIf="hasPrev" (click)="previousPage()">Previous page</button>
+    <button class="base_button" *ngIf="hasNext" (click)="nextPage()">Next page</button>
+  </div>
+</div>
+<app-footer></app-footer>

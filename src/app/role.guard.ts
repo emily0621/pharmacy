@@ -17,10 +17,9 @@ export class RoleGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean>{
     return new Observable<boolean>((observer) => {
       this.auth.checkUser().then((user) => {
-        console.log("USER access_token from guard: ")
-        console.log(JSON.stringify(user.access_token))
+        console.log("Role guard: ")
+        user.printUser()
         let roles = next.data["roles"] as Array<Role>;
-        console.log(user.role)
         for (let i = 0; i < roles.length; i++){
           if (roles[i] == user.role) {
             observer.next(true);

@@ -20,7 +20,9 @@ body{
     justify-content: space-between;
 }
 
-app-login, app-registration, app-user-profile, app-products, app-users{
+app-login, app-registration, app-user-profile,
+app-products, app-users, app-wish-list,
+app-orders, app-shopping-cart, app-order{
     @include base_page_style()
 }
 
@@ -67,7 +69,7 @@ app-input-field, app-information-field{
 
 :hover{
     transition-delay: 0.1s;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out 0.1s;
 }
 
 a {
@@ -125,6 +127,15 @@ a {
   object-fit: cover
 }
 
+.products{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  row-gap: 50px;
+}
+
 app-simple-medicine{
   @include addTransition();
   @include border(5px, 50px);
@@ -176,5 +187,82 @@ app-input-field{
   p{
     @include addTransition();
     font-size: 23px;
+  }
+}
+
+app-base-error{
+  .error{
+    width: 800px;
+    margin: auto;
+    @include border(5px, 50px);
+    @include mainText(20px);
+    border: none;
+    margin-bottom: 50px;
+    padding: 40px;
+    opacity: 0.8;
+    background-color: darkred;
+    text-shadow: 0px 10px 8px rgba(0, 0, 0, 0.5);
+    box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+  .success{
+    @extend .error;
+    background-color: $mainColor;
+  }
+}
+
+app-single-medicine{
+  display: inline-flex;
+  @include border(5px, 50px);
+  height: auto;
+  text-align: center;
+  justify-content: space-around;
+  align-items: center;
+  width: auto;
+  margin: auto;
+  background-color: $lightColor;
+  padding: 20px 20px 20px 20px;
+  app-base-error{
+    .error{
+      width: auto;
+      padding: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+app-short-order-information{
+  @include border(5px, 50px);
+  @include addTransition();
+  background-color: $lightColor;
+  width: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 25px;
+  app-information-field .information_field{
+    text-align: right;
+  }
+}
+
+app-short-order-information:hover{
+  background-color: $hoverColor;
+  width: 530px;
+  gap: 20px;
+}
+
+app-order-medicine app-input-field{
+  margin: 0;
+}
+
+app-order-medicine{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  app-simple-medicine{
+    margin: 0;
+  }
+  app-input-field{
+    gap: 20px;
   }
 }

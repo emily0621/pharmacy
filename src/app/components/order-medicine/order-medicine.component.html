@@ -1,0 +1,4 @@
+
+<input type="checkbox" [(ngModel)]="checkedMedicine">
+<ng-container *ngComponentOutlet="medicineComponent; injector: medicineInjector"></ng-container>
+<app-input-field type_field="number" name_field="Count: " placeholder="1" *ngIf="checkedMedicine"></app-input-field>

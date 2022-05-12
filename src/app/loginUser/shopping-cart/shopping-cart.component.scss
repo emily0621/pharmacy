@@ -1,0 +1,9 @@
+@import '/src/styles.scss';
+
+.shopping_cart{
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  margin-bottom: 50px;
+}
+

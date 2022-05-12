@@ -25,12 +25,12 @@ export class AuthService {
       let refresh_token = localStorage.getItem('refresh_token')
       let access_token = localStorage.getItem('access_token')
       this.user.setUser(access_token, refresh_token, Role.guest)
-      console.log("USER: ")
-      this.user.printUser()
       if (refresh_token != null && access_token != null) {
         this.refreshAccessToken(refresh_token, access_token).then((res) => {
           this.response = res
-          if (this.response != null) this.user.access_token = this.response.access_token
+          if (this.response != null)
+          this.user.access_token = this.response.access_token
+          localStorage.setItem('access_token', this.user.access_token)
           this.getRole().then((res) => {
             this.response = res
             if (this.response.role == false){
@@ -43,7 +43,6 @@ export class AuthService {
         })
       }
       else {
-        this.user.printUser()
         resolve(this.user)
       }
     })
@@ -53,7 +52,18 @@ export class AuthService {
     return this.http.post('/access_token', {'access_token': access_token}, {headers: this.getHeaders(refresh_token)}).toPromise()
   }
 
-  async getRole(){
+  checkRole(): Promise<Role>{
+    return new Promise((resolve) => {
+      if (this.user.access_token != null) {
+        this.getRole().then((response: any) => {
+          if (response.role == true) resolve(Role.provisor)
+          else if (response.role == false) resolve(Role.loginUser)
+        }, (error) => {})
+      } else resolve(Role.guest)
+    })
+  }
+
+  getRole(){
     return this.http.get('/role', {headers: this.getHeaders(this.user.access_token)}).toPromise()
   }
 

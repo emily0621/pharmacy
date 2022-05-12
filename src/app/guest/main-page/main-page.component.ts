@@ -4,12 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SimpleMedicineComponent } from 'src/app/components/medicine/simple-medicine/simple-medicine.component';
 
 export class InputValuesIntoSimpleMedicine {
+  id: number
   image: string
   name: string
   price: string | null = null
   available: boolean | null = null
 
-  constructor(image: string, name:string, price: string | null = null, available: number | null = null){
+  constructor(id: number, image: string, name:string, price: string | null = null, available: number | null = null){
+    this.id = id
     this.image = image
     this.name = name
     this.price = price
@@ -45,7 +47,7 @@ export class MainPageComponent implements OnInit{
       console.log(response)
       this.component = SimpleMedicineComponent
       response.forEach((medicine: any) => {
-        let inj: Injector = Injector.create([{provide: InputValuesIntoSimpleMedicine, useValue: {image: medicine.image, name: medicine.name_medicine}}], this.injector)
+        let inj: Injector = Injector.create([{provide: InputValuesIntoSimpleMedicine, useValue: {id: medicine.id_medicine, image: medicine.image, name: medicine.name_medicine}}], this.injector)
         this.simpleMedicine.push(inj)
       });
     }, (error) =>{
