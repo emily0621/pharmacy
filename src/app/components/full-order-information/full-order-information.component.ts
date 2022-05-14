@@ -31,10 +31,11 @@ export class FullOrderInformationComponent implements OnInit {
       this.date = response.date_order
       this.status = response.status
       this.medicineFromOrderRequest().then((response: any) => {
+        console.log(response)
         let price = 0
-        for (let i = 0; i < response.count.length; i++){
+        for (let i = 0; i < response.medicine.length; i++){
           console.log("test: ", response.medicine[i].name_medicine)
-          if (this.medicine.length < 50) this.medicine += response.medicine[i].name_medicine.toLowerCase() + ', '
+          if (this.medicine.length < 50) this.medicine += response.medicine[i].name_medicine.toLowerCase() + 'x' + response.count[i].count + ', '
           price += response.count[i].count * response.medicine[i].price
         }
         this.medicine = this.medicine.slice(0, -2)

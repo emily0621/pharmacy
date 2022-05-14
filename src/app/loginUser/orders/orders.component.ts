@@ -26,9 +26,10 @@ export class OrdersComponent implements OnInit {
     private http: HttpClient,
     private auth: AuthService,
     private injector: Injector,
-    public redirecting: RedirectingService
+    public redirecting: RedirectingService,
+    private route: ActivatedRoute
   ) {
-    this.redirecting.getRoute().params.subscribe((param: any) => {
+    this.route.params.subscribe((param: any) => {
       this.username = param.username
       this.redirecting.initPages(param.page)
     })

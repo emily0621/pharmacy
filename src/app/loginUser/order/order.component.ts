@@ -49,8 +49,9 @@ export class OrderComponent implements OnInit {
         })
       } else {
         this.userFromOrderRequest().then((response: any) => {
+          console.log(response)
           this.deleteOrderRequest().then(() => {
-            this.redirecting.redirect('/user_orders/' + response.username, {delete: true})
+            this.redirecting.redirect('/user_orders/' + response.username + '/1', null)
           })
         }, (error) => {
           console.log(error)
@@ -76,7 +77,7 @@ export class OrderComponent implements OnInit {
   }
 
   medicineInOrder(){
-    this.redirecting.redirect('/medicine/order/' + this.id, null)
+    this.redirecting.redirect('/medicine/order/' + this.id + '/1', null)
   }
 
   deleteOrderRequest(){

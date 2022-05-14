@@ -31,11 +31,22 @@ export class RedirectingService {
     })
   }
 
+  getBaseUrl(){
+    console.log(this.route.url.subscribe((url: any) => {
+      console.log(url)
+    }))
+    return this.router.url.split('?')[0]
+  }
+
   sendNotFound() {
     this.router.navigate(['/not_found'], {relativeTo: this.route})
   }
 
   redirect(url: string, params: any){
+    this.router.navigate([url], {queryParams: params, relativeTo: this.route})
+  }
+
+  redirectWithReload(url: string, params: any){
     this.router.navigate([url], {queryParams: params, relativeTo: this.route}).then(() => {
       window.location.reload()
     })
@@ -47,12 +58,12 @@ export class RedirectingService {
   }
 
   hasNextPage(currentCount: number, totalCount: number, size: number){
-    if ((this.page - 1) * size + currentCount == totalCount) this.hasNext = false
+    if (currentCount < MEDICINE_SIZE || (this.page - 1) * size + currentCount == totalCount) this.hasNext = false
     else this.hasNext = true
   }
 
   previousPage(){
-    this.redirect(this.baseUrl.slice(0, this.baseUrl.lastIndexOf('/') + 1).concat((--this.page).toString()), this.queryParams)
+    this.redirect(this.getBaseUrl().slice(0, this.baseUrl.lastIndexOf('/') + 1).concat((--this.page).toString()), this.queryParams)
   }
 
   nextPage(){

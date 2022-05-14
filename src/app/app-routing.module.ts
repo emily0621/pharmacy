@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: 'user_orders/:username/:page', component: OrdersComponent, canActivate:[RoleGuard], data: { roles: [Role.provisor]}},
   {path: 'shopping_cart', component: ShoppingCartComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser]}},
   {path: 'order_page/:id', component: OrderComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}},
-  {path: 'medicine/order/:id', component: MedicineInOrderComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}},
+  {path: 'medicine/order/:id/:page', component: MedicineInOrderComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}},
   {path: 'user_page/:username', component: UserPageComponent, canActivate:[RoleGuard], data: { roles: [Role.provisor]}},
   {path: 'find_order', component: FindOrderComponent, canActivate:[RoleGuard], data: { roles: [Role.provisor]}},
   {path: 'orders/:page', component: OrdersResultComponent, canActivate:[RoleGuard], data: { roles: [Role.provisor]}}

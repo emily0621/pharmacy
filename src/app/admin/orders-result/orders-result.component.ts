@@ -63,7 +63,7 @@ export class OrdersResultComponent implements OnInit {
   }
 
   resolveParams(){
-    this.route.queryParams.subscribe((params: any) => {
+    return this.route.queryParams.subscribe((params: any) => {
       console.log(params)
       if (params['date']) this.date = this.asArray(params['date'])
       if (params['username']) this.username = this.asArray(params['username'])

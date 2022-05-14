@@ -54,7 +54,7 @@ export class FindOrderComponent implements OnInit {
         price: this.price,
         status: this.status
       }
-      this.redirecting.redirect('/orders/1', params)
+      this.redirecting.redirectWithReload('/orders/1', params)
     }
   }
 

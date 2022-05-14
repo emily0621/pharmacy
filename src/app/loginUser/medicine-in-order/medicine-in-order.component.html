@@ -6,8 +6,8 @@
       <ng-container *ngComponentOutlet="medicineComponent; injector: medicine"></ng-container>
     </ng-container>
   </div><div class="button_list">
-    <button class="base_button" *ngIf="hasPrev" (click)="previousPage()">Previous page</button>
-    <button class="base_button" *ngIf="hasNext" (click)="nextPage()">Next page</button>
+    <button class="base_button" *ngIf="redirecting.hasPrev" (click)="redirecting.previousPage()">Previous page</button>
+    <button class="base_button" *ngIf="redirecting.hasNext" (click)="redirecting.nextPage()">Next page</button>
   </div>
 </div>
 <app-footer></app-footer>
