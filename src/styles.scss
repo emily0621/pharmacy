@@ -22,7 +22,9 @@ body{
 
 app-login, app-registration, app-user-profile,
 app-products, app-users, app-wish-list,
-app-orders, app-shopping-cart, app-order{
+app-orders, app-shopping-cart, app-order,
+app-medicine-in-order, app-find-order,
+app-orders-result{
     @include base_page_style()
 }
 
@@ -264,5 +266,25 @@ app-order-medicine{
   }
   app-input-field{
     gap: 20px;
+  }
+}
+
+app-full-order-information{
+  @include border(5px, 50px);
+  background-color: $lightColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 700px;
+  margin: auto;
+  padding: 40px;
+  margin-bottom: 30px;
+  app-information-field{
+    .base_label{
+      font-size: 25px;
+    }
+    .information_field{
+      font-size: 25px;
+    }
   }
 }

@@ -3,8 +3,8 @@ import { Component, Injector, OnInit, Type } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { BaseErrorComponent, ErrorMessage } from 'src/app/components/base-error/base-error.component';
-import { SimpleMedicineComponent } from 'src/app/components/medicine/simple-medicine/simple-medicine.component';
-import { InputValuesIntoSimpleMedicine } from 'src/app/guest/main-page/main-page.component';
+import { InputValuesIntoSimpleMedicine, SimpleMedicineComponent } from 'src/app/components/medicine/simple-medicine/simple-medicine.component';
+import { RedirectingService } from 'src/app/redirecting.service';
 
 @Component({
   selector: 'app-wish-list',
@@ -19,6 +19,7 @@ export class WishListComponent implements OnInit {
   showFilter = false;
 
   count: number = 0
+  currentCount: number
   page: number = 1
 
   simpleMedicine: Array<Injector>
@@ -34,6 +35,7 @@ export class WishListComponent implements OnInit {
     private injector: Injector,
     private router: Router,
     private route: ActivatedRoute,
+    private redirecting: RedirectingService
     )
     {
       this.router.routeReuseStrategy.shouldReuseRoute = function() {
@@ -50,6 +52,9 @@ export class WishListComponent implements OnInit {
         else {
           this.count = response.count
           this.medicine = JSON.parse(response.medicine)
+          this.currentCount = this.medicine.length
+          this.hasNextPage()
+          this.hasPreviousPage()
           this.simpleMedicine = new Array<Injector>()
           this.medicine.forEach((medicine: any) => {
             console.log(medicine)
@@ -75,7 +80,7 @@ export class WishListComponent implements OnInit {
 
   wishList(){
     console.log(this.auth.getUser().access_token)
-    return this.http.get("/medicine_from_wish_list", {headers: this.auth.getHeaders(this.auth.getUser().access_token)}).toPromise()
+    return this.http.get("/medicine_from_wish_list/" + this.page, {headers: this.auth.getHeaders(this.auth.getUser().access_token)}).toPromise()
   }
 
   medicinePage(event: any){
@@ -96,6 +101,7 @@ export class WishListComponent implements OnInit {
 
   previousPage(){
     this.page = this.page - 1
+    this.redirecting.redirect('/wish_list', {page: this.page})
   }
 
   hasNextPage(){
@@ -106,5 +112,6 @@ export class WishListComponent implements OnInit {
   nextPage(){
     this.page = this.page + 1
     console.log(this.page)
+    this.redirecting.redirect('/wish_list', {page: this.page})
   }
 }

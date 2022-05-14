@@ -6,7 +6,6 @@ import { AuthService } from 'src/app/auth.service';
 import { BaseErrorComponent, ErrorMessage } from 'src/app/components/base-error/base-error.component';
 import { OrderMedicineComponent } from 'src/app/components/order-medicine/order-medicine.component';
 import { DynamicComponentService } from 'src/app/dynamic-component.service';
-import { InputValuesIntoSimpleMedicine } from 'src/app/guest/main-page/main-page.component';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -19,6 +18,8 @@ export class ShoppingCartComponent implements OnInit {
   errorComponent: Type<any>
   errorInjector: Injector
 
+
+  deleteAfter: boolean = false
   medicineComponent: Type<any>
   medicineInjectors: Array<Injector>
 
@@ -57,6 +58,16 @@ export class ShoppingCartComponent implements OnInit {
       let data = {medicine: medicine, count: count}
       this.makeOrderRequest(data).then((response: any) => {
         console.log(response)
+        console.log("delete after", this.deleteAfter)
+        if (this.deleteAfter){
+        medicine.forEach(id => {
+          this.deleteFromShoppingCartRequest(id).then((response) => {
+            console.log(response)
+          }, (error) => {
+            console.log(response)
+          })
+        });
+      }
         this.router.navigate(['/user_orders'], {queryParams: {success: true}, relativeTo: this.route})
       }, (error) => {
         this.displayError(error.error.message)
@@ -80,4 +91,7 @@ export class ShoppingCartComponent implements OnInit {
     return this.http.post('/make_order', body, {headers: this.auth.getHeaders(this.auth.getUser().access_token)}).toPromise()
   }
 
+  deleteFromShoppingCartRequest(id: number){
+    return this.http.delete('/shopping_cart/' + id, {headers: this.auth.getHeaders(this.auth.getUser().access_token)}).toPromise()
+  }
 }

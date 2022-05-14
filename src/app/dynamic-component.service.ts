@@ -11,7 +11,6 @@ export class DynamicComponentService {
   makeOrderChange: Subject<boolean> = new Subject<boolean>();
 
   constructor() {
-
   }
 
   async addData(data: any){

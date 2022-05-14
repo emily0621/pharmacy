@@ -4,6 +4,7 @@ import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { BaseErrorComponent, ErrorMessage } from 'src/app/components/base-error/base-error.component';
 import { OrderInformation, ShortOrderInformationComponent } from 'src/app/components/short-order-information/short-order-information.component';
+import { ORDER_SIZE, RedirectingService } from 'src/app/redirecting.service';
 
 @Component({
   selector: 'app-orders',
@@ -12,16 +13,10 @@ import { OrderInformation, ShortOrderInformationComponent } from 'src/app/compon
 })
 export class OrdersComponent implements OnInit {
 
-  hasSuccess: boolean = false
-
-  hasNext: boolean = false
-  hasPrev: boolean = false
+  username: string | null = null
 
   orderComponent: Type<any>
   orderInjectors: Array<Injector>
-  page: number = 1
-  count: number
-  currentCount: number
 
   hasMessage : boolean = false
   messageComponent: Type<any>
@@ -31,36 +26,51 @@ export class OrdersComponent implements OnInit {
     private http: HttpClient,
     private auth: AuthService,
     private injector: Injector,
-    private router: Router,
-    private route: ActivatedRoute
+    public redirecting: RedirectingService
   ) {
-    this.router.routeReuseStrategy.shouldReuseRoute = function() {
-      return false;
-    };
+    this.redirecting.getRoute().params.subscribe((param: any) => {
+      this.username = param.username
+      this.redirecting.initPages(param.page)
+    })
   }
 
   ngOnInit(): void {
     this.resolveParams().then(() => {
-      this.ordersByUserRequest().then((response: any) => {
+      if (this.username == null){
+        this.ordersByUserRequest().then((response: any) => {
+          if (response.count == 0){
+            this.displayError('You don`t have any order', false)
+          } else {
+            this.orderComponent = ShortOrderInformationComponent
+            this.orderInjectors = new Array<Injector>()
+            const orders = JSON.parse(response.orders)
+            this.redirecting.checkPagesExists(orders.length, response.count, ORDER_SIZE)
+            orders.forEach((order: any) => {
+              this.orderInjectors.push(Injector.create([{provide: OrderInformation,
+                useValue: {id: order.id_order, date: order.date_order, status: order.status}}], this.injector))
+            });
+          }
+        }, (error) => {
+          console.log(error.error.message)
+        })
+    } else {
+      this.ordersByUsernameRequest().then((response: any) => {
         if (response.count == 0){
-          this.displayError('You don`t have any order', false)
+          this.displayError(this.username + ' doesn`t have any order', false)
         } else {
           this.orderComponent = ShortOrderInformationComponent
           this.orderInjectors = new Array<Injector>()
           const orders = JSON.parse(response.orders)
-          this.count = response.count
-          this.currentCount = orders.length
-          this.hasNextPage()
-          this.hasPrevPage()
+          this.redirecting.checkPagesExists(orders.length, response.count, ORDER_SIZE)
           orders.forEach((order: any) => {
             this.orderInjectors.push(Injector.create([{provide: OrderInformation,
               useValue: {id: order.id_order, date: order.date_order, status: order.status}}], this.injector))
           });
         }
-        console.log(response)
       }, (error) => {
         console.log(error.error.message)
       })
+    }
     })
   }
 
@@ -72,47 +82,27 @@ export class OrdersComponent implements OnInit {
 
   resolveParams(){
     return new Promise<void>((resolve) => {
-      this.route.queryParams.subscribe((params: any) => {
-        if (params['page']) this.page = parseInt(params['page'])
+      this.redirecting.getRoute().queryParams.subscribe((params: any) => {
+        if (params['page']) this.redirecting.page = parseInt(params['page'])
         if (params['success']) {
           const success = params['success']
-          if (success == 'true') {
-            this.hasSuccess = true
-            this.displayError('New order was added', true)
-          }
+          if (success == 'true') this.displayError('New order was added', true)
         }
+        if (params['delete'] == 'true') this.displayError('Order was successfully canceled', true)
         resolve()
       })
     })
   }
 
-  previousPage(){
-    this.page = this.page - 1
-    this.router.navigate(['/user_orders'], {queryParams: {page: this.page}, relativeTo: this.route})
-  }
-
-  hasPrevPage(){
-    if (this.page != 1) this.hasPrev = true
-    else this.hasPrev = false
-  }
-
-  nextPage(){
-    this.page = this.page + 1
-    this.router.navigate(['/user_orders'], {queryParams: {page: this.page}, relativeTo: this.route})
-  }
-
-  hasNextPage(){
-    console.log(this.currentCount, this.count)
-    if ((this.page - 1) * 6 + this.currentCount == this.count) this.hasNext = false
-    else this.hasNext = true
-  }
-
   ordersByUserRequest(){
-    return this.http.get('/order_for_login_user/' + this.page, {headers: this.auth.getHeaders(this.auth.getUser().access_token)}).toPromise()
+    return this.http.get('/order_for_login_user/' + this.redirecting.page, {headers: this.auth.getHeaders(this.auth.getUser().access_token)}).toPromise()
+  }
+
+  ordersByUsernameRequest(){
+    return this.http.get('/order_for_login_user/' + this.username + '/' + this.redirecting.page, {headers: this.auth.getHeaders(this.auth.getUser().access_token)}).toPromise()
   }
 
   newOrder(){
-    this.router.navigate(['/shopping_cart'], {relativeTo: this.route})
+    this.redirecting.redirect('/shopping_cart', null)
   }
-
 }

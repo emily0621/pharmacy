@@ -7,6 +7,8 @@
       injector: medicine"></ng-container>
     </ng-container>
   </div>
+  <label for="delete_after"></label>
+  <input type="checkbox" [(ngModel)]="deleteAfter" name="deleteAfter">
   <div class="button_list">
     <button class="base_button" (click)="makeOrder()">Order</button>
   </div>

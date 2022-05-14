@@ -3,9 +3,8 @@ import { Component, ComponentRef, EventEmitter, HostListener, Injector, OnChange
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { DynamicComponentService } from 'src/app/dynamic-component.service';
-import { InputValuesIntoSimpleMedicine } from 'src/app/guest/main-page/main-page.component';
 import { InputFieldComponent } from '../input-field/input-field.component';
-import { SimpleMedicineComponent } from '../medicine/simple-medicine/simple-medicine.component';
+import { InputValuesIntoSimpleMedicine, SimpleMedicineComponent } from '../medicine/simple-medicine/simple-medicine.component';
 
 @Component({
   selector: 'app-order-medicine',

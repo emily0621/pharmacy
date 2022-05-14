@@ -3,9 +3,8 @@ import { Component, Injector, OnInit, Type } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { BaseErrorComponent, ErrorMessage } from 'src/app/components/base-error/base-error.component';
-import { SimpleMedicineComponent } from 'src/app/components/medicine/simple-medicine/simple-medicine.component';
+import { InputValuesIntoSimpleMedicine, SimpleMedicineComponent } from 'src/app/components/medicine/simple-medicine/simple-medicine.component';
 import { Role } from 'src/app/role';
-import { InputValuesIntoSimpleMedicine } from '../main-page/main-page.component';
 
 @Component({
   selector: 'app-products',

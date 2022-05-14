@@ -1,8 +1,7 @@
 <app-nav></app-nav>
 <div class="base_page">
-  <h3 class="base_title" *ngIf="username == null">Your orders</h3>
-  <h3 class="base_title" *ngIf="username != null">{{username}}`s orders</h3>
-  <ng-container [ngIf]="hasMessage" *ngComponentOutlet="messageComponent; injector: messageInjector"></ng-container>
+  <h3 class="base_title">Search result</h3>
+  <ng-container [ngIf]="hasError" *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>
   <div class="order">
     <ng-container *ngFor="let order of orderInjectors">
       <ng-container *ngComponentOutlet="orderComponent; injector: order"></ng-container>
@@ -12,9 +11,5 @@
     <button class="base_button" *ngIf="redirecting.hasPrev" (click)="redirecting.previousPage()">Previous page</button>
     <button class="base_button" *ngIf="redirecting.hasNext" (click)="redirecting.nextPage()">Next page</button>
   </div>
-  <div class="button_list">
-    <button class="base_button" (click)="newOrder()" *ngIf="username == null">New order</button>
-  </div>
 </div>
 <app-footer></app-footer>
-

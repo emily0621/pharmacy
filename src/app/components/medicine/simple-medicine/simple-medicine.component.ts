@@ -1,7 +1,25 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, Inject, Injector, Input, OnInit, HostListener } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { InputValuesIntoSimpleMedicine } from 'src/app/guest/main-page/main-page.component';
+
+export class InputValuesIntoSimpleMedicine {
+  id: number
+  image: string
+  name: string
+  price: string | null = null
+  available: boolean | null = null
+
+  constructor(id: number, image: string, name:string, price: string | null = null, available: number | null = null){
+    this.id = id
+    this.image = image
+    this.name = name
+    this.price = price
+    if (available != null){
+      if (available == 0) this.available = false
+      else this.available = true
+    }
+  }
+}
 
 @Component({
   selector: 'app-simple-medicine',
