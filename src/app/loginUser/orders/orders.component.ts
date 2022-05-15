@@ -32,6 +32,7 @@ export class OrdersComponent implements OnInit {
     this.route.params.subscribe((param: any) => {
       this.username = param.username
       this.redirecting.initPages(param.page)
+      this.redirecting.baseUrl = this.redirecting.getRouter().url.split('?')[0]
     })
   }
 
@@ -53,6 +54,7 @@ export class OrdersComponent implements OnInit {
           }
         }, (error) => {
           console.log(error.error.message)
+          this.redirecting.sendNotFound()
         })
     } else {
       this.ordersByUsernameRequest().then((response: any) => {
@@ -70,6 +72,7 @@ export class OrdersComponent implements OnInit {
         }
       }, (error) => {
         console.log(error.error.message)
+        this.redirecting.sendNotFound()
       })
     }
     })
@@ -83,8 +86,8 @@ export class OrdersComponent implements OnInit {
 
   resolveParams(){
     return new Promise<void>((resolve) => {
-      this.redirecting.getRoute().queryParams.subscribe((params: any) => {
-        if (params['page']) this.redirecting.page = parseInt(params['page'])
+      this.route.queryParams.subscribe((params: any) => {
+        // this.redirecting.queryParams = params
         if (params['success']) {
           const success = params['success']
           if (success == 'true') this.displayError('New order was added', true)

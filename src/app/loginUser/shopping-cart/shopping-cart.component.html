@@ -7,10 +7,14 @@
       injector: medicine"></ng-container>
     </ng-container>
   </div>
-  <label for="delete_after"></label>
-  <input type="checkbox" [(ngModel)]="deleteAfter" name="deleteAfter">
+  <div class="form-check" id="delete_after_check">
+    <input class="form-check-input" type="checkbox" value="" id="flex_check_default" *ngIf="!empty" [(ngModel)]="deleteAfter">
+    <label class="form-check-label" for="flexCheckDefault" id="delete_label">Delete selected after order</label>
+  </div>
+  <!-- <label for="delete_after"></label>
+  <input type="checkbox" [(ngModel)]="deleteAfter" name="deleteAfter" *ngIf="!empty"> -->
   <div class="button_list">
-    <button class="base_button" (click)="makeOrder()">Order</button>
+    <button class="base_button" (click)="makeOrder()" *ngIf="!empty">Order</button>
   </div>
   <ng-container *ngIf="hasError">
     <ng-container *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>

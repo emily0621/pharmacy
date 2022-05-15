@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, Inject, Injector, OnInit, Type } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { RedirectingService } from 'src/app/redirecting.service';
 import { Role } from 'src/app/role';
 import { BaseErrorComponent, ErrorMessage } from '../../base-error/base-error.component';
 
@@ -56,12 +57,14 @@ export class SingleMedicineComponent implements OnInit {
   role: string
 
   constructor(
+    private redirecting: RedirectingService,
     private injector: Injector,
     private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
     private auth: AuthService,
-    medicine: Medicine) {
+    medicine: Medicine
+    ) {
     this.auth.checkRole().then((response: any) => {
       this.role = response
       console.log("ROLE ", this.role)
@@ -137,6 +140,6 @@ export class SingleMedicineComponent implements OnInit {
   }
 
   productsPage(params: any){
-    this.router.navigate(['/products'], {queryParams: params, relativeTo: this.route})
+    this.redirecting.redirect('/products/1', params)
   }
 }

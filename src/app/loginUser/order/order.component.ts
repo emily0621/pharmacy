@@ -43,7 +43,7 @@ export class OrderComponent implements OnInit {
     this.auth.checkUser().then(() => {
       if (this.auth.getUser().role == Role.loginUser){
         this.deleteOrderRequest().then((response: any) => {
-          this.redirecting.redirect('/user_orders', {delete: true})
+          this.redirecting.redirect('/user_orders/1', {delete: true})
         }, (error) => {
           console.log(error.error.message)
         })

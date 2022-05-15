@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { LoginComponent } from './guest/login/login.component';
 import { LoginNavComponent } from './components/nav/login-nav/login-nav.component';
 import { AdminNavComponent } from './components/nav/admin-nav/admin-nav.component';

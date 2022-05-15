@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { BaseErrorComponent, ErrorMessage } from 'src/app/components/base-error/base-error.component';
 import { InputValuesIntoSimpleMedicine, SimpleMedicineComponent } from 'src/app/components/medicine/simple-medicine/simple-medicine.component';
-import { RedirectingService } from 'src/app/redirecting.service';
+import { MEDICINE_SIZE, RedirectingService } from 'src/app/redirecting.service';
 
 @Component({
   selector: 'app-wish-list',
@@ -13,14 +13,14 @@ import { RedirectingService } from 'src/app/redirecting.service';
 })
 export class WishListComponent implements OnInit {
 
-  hasNext: boolean
-  hasPrev: boolean
+  // hasNext: boolean
+  // hasPrev: boolean
 
-  showFilter = false;
+  // showFilter = false;
 
-  count: number = 0
-  currentCount: number
-  page: number = 1
+  // count: number = 0
+  // currentCount: number
+  // page: number = 1
 
   simpleMedicine: Array<Injector>
   medicine: Array<any>
@@ -33,28 +33,23 @@ export class WishListComponent implements OnInit {
     private http: HttpClient,
     private auth: AuthService,
     private injector: Injector,
-    private router: Router,
     private route: ActivatedRoute,
-    private redirecting: RedirectingService
-    )
-    {
-      this.router.routeReuseStrategy.shouldReuseRoute = function() {
-        return false;
-      };
+    public redirecting: RedirectingService
+    ) {
+      this.route.params.subscribe((param: any) => {
+        this.redirecting.initPages(param.page)
+        this.redirecting.baseUrl = this.redirecting.getRouter().url.split('?')[0]
+      })
     }
 
   ngOnInit(): void {
-    this.resolveParams().then(() => {
       this.wishList().then((response: any) => {
         this.component = SimpleMedicineComponent
         console.log(response)
         if (response.count == 0) this.displayError()
         else {
-          this.count = response.count
           this.medicine = JSON.parse(response.medicine)
-          this.currentCount = this.medicine.length
-          this.hasNextPage()
-          this.hasPreviousPage()
+          this.redirecting.checkPagesExists(this.medicine.length, response.count, MEDICINE_SIZE)
           this.simpleMedicine = new Array<Injector>()
           this.medicine.forEach((medicine: any) => {
             console.log(medicine)
@@ -62,25 +57,15 @@ export class WishListComponent implements OnInit {
             console.log(inj.get(InputValuesIntoSimpleMedicine))
             this.simpleMedicine.push(inj)
           })
-          this.hasPreviousPage()
-          this.hasNextPage()
         }
+      }, (error) => {
+        console.log(error.error)
+        this.redirecting.sendNotFound()
       })
-    })
-  }
-
-  resolveParams(){
-    return new Promise<void>((resolve) => {
-      this.route.queryParams.subscribe((params: any) => {
-        if (params['page']) this.page = parseInt(params['page'])
-        resolve()
-      })
-    })
   }
 
   wishList(){
-    console.log(this.auth.getUser().access_token)
-    return this.http.get("/medicine_from_wish_list/" + this.page, {headers: this.auth.getHeaders(this.auth.getUser().access_token)}).toPromise()
+    return this.http.get("/medicine_from_wish_list/" + this.redirecting.page, {headers: this.auth.getHeaders(this.auth.getUser().access_token)}).toPromise()
   }
 
   medicinePage(event: any){
@@ -94,24 +79,24 @@ export class WishListComponent implements OnInit {
     console.log(this.messageInjector.get(ErrorMessage))
   }
 
-  hasPreviousPage(){
-    if (this.page != 1) this.hasPrev = true
-    else this.hasPrev = false
-  }
+  // hasPreviousPage(){
+  //   if (this.page != 1) this.hasPrev = true
+  //   else this.hasPrev = false
+  // }
 
-  previousPage(){
-    this.page = this.page - 1
-    this.redirecting.redirect('/wish_list', {page: this.page})
-  }
+  // previousPage(){
+  //   this.page = this.page - 1
+  //   this.redirecting.redirect('/wish_list', {page: this.page})
+  // }
 
-  hasNextPage(){
-    if ((this.page - 1) * 9 + this.medicine.length == this.count) this.hasNext = false
-    else this.hasNext = true
-  }
+  // hasNextPage(){
+  //   if ((this.page - 1) * 9 + this.medicine.length == this.count) this.hasNext = false
+  //   else this.hasNext = true
+  // }
 
-  nextPage(){
-    this.page = this.page + 1
-    console.log(this.page)
-    this.redirecting.redirect('/wish_list', {page: this.page})
-  }
+  // nextPage(){
+  //   this.page = this.page + 1
+  //   console.log(this.page)
+  //   this.redirecting.redirect('/wish_list', {page: this.page})
+  // }
 }

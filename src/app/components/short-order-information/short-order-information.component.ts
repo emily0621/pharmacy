@@ -47,11 +47,14 @@ export class ShortOrderInformationComponent implements OnInit {
       console.log(response)
       this.medicines = ''
       for(let i = 0; i < response.count.length; i++){
-        this.medicines = this.medicines + response.medicine[i] + 'x' + response.count[i] + ', '
+        this.medicines = this.medicines + response.medicine[i].toLowerCase() + 'x' + response.count[i] + ', '
         if (this.medicines.length >= 50) {
           this.medicines = this.medicines.substring(0, 47) + '...'
           break;
         }
+      }
+      if (this.medicines.length < 50){
+        this.medicines = this.medicines.slice(0, this.medicines.length - 2)
       }
       console.log(this.medicines)
     }, (error) => {

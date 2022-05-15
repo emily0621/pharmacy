@@ -32,3 +32,9 @@ app-footer{
     font-size: 23px;
     color: $hoverColor;
 }
+
+
+.form-check-input:checked {
+  background-color: red;
+  border-color: #0d6efd;
+}

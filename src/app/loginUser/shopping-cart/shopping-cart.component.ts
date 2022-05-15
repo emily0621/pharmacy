@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/auth.service';
 import { BaseErrorComponent, ErrorMessage } from 'src/app/components/base-error/base-error.component';
 import { OrderMedicineComponent } from 'src/app/components/order-medicine/order-medicine.component';
 import { DynamicComponentService } from 'src/app/dynamic-component.service';
+import { RedirectingService } from 'src/app/redirecting.service';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -14,10 +15,11 @@ import { DynamicComponentService } from 'src/app/dynamic-component.service';
 })
 export class ShoppingCartComponent implements OnInit {
 
+  empty: boolean = false
+
   hasError: boolean = false
   errorComponent: Type<any>
   errorInjector: Injector
-
 
   deleteAfter: boolean = false
   medicineComponent: Type<any>
@@ -28,12 +30,16 @@ export class ShoppingCartComponent implements OnInit {
     private auth: AuthService,
     private injector: Injector,
     private dynamicComponentService: DynamicComponentService,
-    private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private redirecting: RedirectingService
   ) { }
 
   ngOnInit(): void {
     this.shoppingCartRequest().then((response: any) => {
+      if (response.length == 0){
+        this.empty = true
+        this.displayError("Your shopping cart is empty")
+      }
       this.medicineComponent = OrderMedicineComponent
       this.medicineInjectors = new Array<Injector>()
       response.forEach((medicine: any) => {
@@ -45,31 +51,22 @@ export class ShoppingCartComponent implements OnInit {
   }
 
   makeOrder(){
+    this.hasError = false
     this.dynamicComponentService.clearData()
     this.dynamicComponentService.toggleMakeOrder()
-    console.log(this.dynamicComponentService.getData())
     this.auth.checkUser().then(() => {
       let medicine = new Array<number>()
       let count = new Array<number>()
-      this.dynamicComponentService.data.forEach(med => {
+      this.dynamicComponentService.getData().forEach(med => {
         medicine.push(med.id)
         count.push(med.count)
       });
-      let data = {medicine: medicine, count: count}
+      let data = {medicine: medicine, count: count, delete: this.deleteAfter}
       this.makeOrderRequest(data).then((response: any) => {
         console.log(response)
         console.log("delete after", this.deleteAfter)
-        if (this.deleteAfter){
-        medicine.forEach(id => {
-          this.deleteFromShoppingCartRequest(id).then((response) => {
-            console.log(response)
-          }, (error) => {
-            console.log(response)
-          })
-        });
-      }
-        this.router.navigate(['/user_orders'], {queryParams: {success: true}, relativeTo: this.route})
-      }, (error) => {
+        this.redirecting.redirect('/user_orders/1', {success: true})
+        }, (error) => {
         this.displayError(error.error.message)
         console.log(error.error.message)
       })

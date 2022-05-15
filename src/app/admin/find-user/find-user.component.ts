@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { BaseErrorComponent, ErrorMessage } from 'src/app/components/base-error/base-error.component';
 import { InputFieldComponent } from 'src/app/components/input-field/input-field.component';
+import { RedirectingService } from 'src/app/redirecting.service';
 
 @Component({
   selector: 'app-find-user',
@@ -27,11 +28,10 @@ export class FindUserComponent implements OnInit {
   private validDate: Array<string> = new Array<string>()
 
   constructor(
-    private http: HttpClient,
-    private auth: AuthService,
     private router: Router,
     private route: ActivatedRoute,
-    private injector: Injector
+    private injector: Injector,
+    private redirecting: RedirectingService
   ) { }
 
   ngOnInit(): void {
@@ -54,18 +54,16 @@ export class FindUserComponent implements OnInit {
     console.log(this.dateOfBirth)
 
     if (this.validate()){
-      let params = {
+      const params = {
         username: this.usernames,
         first_name: this.firstNames,
         last_name: this.lastNames,
         phone: this.phone,
         email: this.email,
-        date_of_birth: this.validDate,
-        page: 1
+        date_of_birth: this.validDate
       }
-
-      this.router.navigate(['/users'], {queryParams: params, relativeTo: this.route})
-    }
+      this.redirecting.redirect('/users/1', params)
+     }
   }
 
   validate(){

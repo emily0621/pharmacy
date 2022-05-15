@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export const ORDER_SIZE: number = 6
 export const MEDICINE_SIZE: number = 9
+export const USER_SIZE: number = 8
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,7 @@ export const MEDICINE_SIZE: number = 9
 export class RedirectingService {
 
   baseUrl: string
-  queryParams: any | null
+  queryParams: any | null = null
 
   hasPages: boolean = false
 
@@ -25,10 +26,11 @@ export class RedirectingService {
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
     };
-    this.baseUrl = this.router.url.split('?')[0]
-    this.route.queryParams.subscribe((params) => {
-      this.queryParams = params
-    })
+    // this.baseUrl = this.router.url.split('?')[0]
+    // this.route.queryParams.subscribe((params) => {
+    //   this.queryParams = params
+    //   console.log(this.queryParams)
+    // })
   }
 
   getBaseUrl(){
@@ -58,7 +60,7 @@ export class RedirectingService {
   }
 
   hasNextPage(currentCount: number, totalCount: number, size: number){
-    if (currentCount < MEDICINE_SIZE || (this.page - 1) * size + currentCount == totalCount) this.hasNext = false
+    if (currentCount < size || (this.page - 1) * size + currentCount == totalCount) this.hasNext = false
     else this.hasNext = true
   }
 
@@ -67,7 +69,7 @@ export class RedirectingService {
   }
 
   nextPage(){
-    this.redirect(this.baseUrl.slice(0, this.baseUrl.lastIndexOf('/') + 1).concat((++this.page).toString()), this.queryParams)
+    this.redirect(this.baseUrl.slice(0, this.getBaseUrl().lastIndexOf('/') + 1).concat((++this.page).toString()), this.queryParams)
   }
 
   initPages(page: number){
@@ -81,7 +83,7 @@ export class RedirectingService {
     this.hasNextPage(currentCount, totalCount, size)
   }
 
-  getRoute(){
-    return this.route
+  getRouter(){
+    return this.router
   }
 }
