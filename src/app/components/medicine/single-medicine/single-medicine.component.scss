@@ -1,0 +1,23 @@
+@import '/src/styles.scss';
+
+.product_information{
+  margin-left: 20px;
+  p{
+    display: flex;
+    width: auto;
+    @include mainText(20px);
+  }
+}
+
+.button_list{
+  margin-bottom: 0;
+  .base_button{
+    min-width: 130px;
+    font-size: 17px;
+    padding: 12px;
+  }
+  .base_button:hover{
+    background-color: $hoverColor;
+    font-size: 14px;
+  }
+}

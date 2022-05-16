@@ -1,0 +1,20 @@
+<img src={{image}} class="product_image">
+<div class="product_information">
+  <p>Manufacturer: {{manufacturer}}</p>
+  <p>Category: {{category}}</p>
+  <p>Price: {{price}}</p>
+  <p>In stock: {{stockNumber}}</p>
+  <p>Description: {{description}}</p>
+  <div class="button_list" *ngIf="role == 'provisor'">
+    <button class="base_button" (click)="deleteMedicine()">Delete</button>
+    <button class="base_button">Edit</button>
+  </div>
+  <div class="button_list" *ngIf="role == 'loginUser'">
+    <button class="base_button" (click)="shoppingCart()">Add to shopping cart</button>
+    <button class="base_button" (click)="wishList()">Add to wish list</button>
+  </div>
+  <div class="button_list" *ngIf="role == 'guest'">
+    <button class="base_button" (click)="login()">Login to order</button>
+  </div>
+  <ng-container class="small_error" [ngIf]="hasMessage" *ngComponentOutlet="messageComponent; injector: messageInjector"></ng-container>
+</div>

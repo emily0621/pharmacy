@@ -1,0 +1,6 @@
+<app-nav></app-nav>
+<div class="base_page">
+  <h3 class="base_title">{{name}}</h3>
+  <ng-container *ngComponentOutlet="medicineComponent; injector: medicineInjector"></ng-container>
+</div>
+<app-footer></app-footer>

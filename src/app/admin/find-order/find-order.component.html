@@ -1,0 +1,27 @@
+<app-nav></app-nav>
+<div class="base_page">
+  <h3 class="base_title">Find order</h3>
+  <div class="base_container">
+    <app-input-field name_field="Date: "></app-input-field>
+    <app-input-field name_field="Username: "></app-input-field>
+    <app-input-field name_field="Medicine: "></app-input-field>
+    <app-input-field name_field="Price: "></app-input-field>
+    <div class="status">
+      <label for="status">Status: </label>
+      <select multiple class="search_select" id="order_select" size="2" [(ngModel)]="status">
+        <option>canceled</option>
+        <option>complete</option>
+        <option>delivered</option>
+        <option>in the process of delivery</option>
+        <option>is being prepared</option>
+        <option>ready to ship</option>
+      </select>
+    </div>
+  </div>
+  <div class="button_list">
+      <button class="base_button" (click)="find()">Find</button>
+  </div>
+  <ng-container [ngIf]="hasError" *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>
+
+</div>
+<app-footer></app-footer>

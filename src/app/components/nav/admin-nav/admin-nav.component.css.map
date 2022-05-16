@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "admin-nav.component.scss"
+    ],
+    "names": [],
+    "file": "admin-nav.component.css"
+}

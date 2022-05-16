@@ -1,0 +1,20 @@
+@import '/src/styles.scss';
+
+.shopping_cart{
+  display: flex;
+  flex-direction: column;
+  gap: 35px;
+  margin-bottom: 50px;
+}
+
+#delete_label{
+  @include mainText(20px);
+  color: $mainColor;
+  margin-left: 10px;
+}
+
+#delete_after_check{
+  display: flex;
+  justify-content: center
+}
+

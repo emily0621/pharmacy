@@ -15,7 +15,7 @@
   </div>
 </header>
 <div class="recommended_block">
-  <h4>Recommended Items</h4>
+  <h4 id="recommended_title">Recommended Items:</h4>
   <div [ngClass]="'recommended_medicine'">
     <ng-container *ngFor='let medicine of simpleMedicine'>
       <ng-container *ngComponentOutlet="component; injector: medicine"></ng-container>

@@ -26,13 +26,14 @@
     </div>
   </div>
   <div class="button_list" id="search_button_list">
-    <div class="available_block">
-      <input type="checkbox" id="only_available" [checked]="available" (change)="changeAvailable()">
-      <label for="only_available" id="available_label">Show only available medicine</label>
+    <div class="form-check" id="delete_after_check">
+      <input class="form-check-input" type="checkbox" value="" id="flex_check_default" [checked]="available" (change)="changeAvailable()">
+      <label class="form-check-label" for="flexCheckDefault" id="delete_label">Show only available medicine</label>
     </div>
     <button class="base_button" type="submit" (click)="newSearch()">Search</button>
   </div>
 </div>
+<ng-container [ngIf]="afterDelete" *ngComponentOutlet="deleteComponent; injector: deleteInjector"></ng-container>
 <div [ngClass]="'products'">
   <ng-container *ngFor='let medicine of simpleMedicine'>
     <ng-container *ngComponentOutlet="component; injector: medicine"></ng-container>
@@ -40,7 +41,7 @@
 </div>
 <ng-container *ngComponentOutlet="messageComponent; injector: messageInjector"></ng-container>
 <div class="button_list">
-  <button class="base_button" *ngIf="hasPrev" (click)="previousPage()">Previous page</button>
-  <button class="base_button" *ngIf="hasNext" (click)="nextPage()">Next page</button>
+  <button class="base_button" *ngIf="redirecting.hasPrev" (click)="redirecting.previousPage()">Previous page</button>
+  <button class="base_button" *ngIf="redirecting.hasNext" (click)="redirecting.nextPage()">Next page</button>
 </div>
 <app-footer></app-footer>
