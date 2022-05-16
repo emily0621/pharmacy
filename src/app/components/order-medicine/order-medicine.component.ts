@@ -20,7 +20,7 @@ export class OrderMedicineComponent implements OnInit{
 
   id: number
   checkedMedicine: boolean = false
-  count: number
+  count: number = 1
 
   constructor(
     private number: Number,

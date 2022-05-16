@@ -17,6 +17,7 @@ export class InputFieldComponent implements OnInit {
   value : any = null;
 
   numberValue(){
+    console.log("Value: ", this.value)
     if (this.value == null) this.value = this.placeholder
     return this.value
   }

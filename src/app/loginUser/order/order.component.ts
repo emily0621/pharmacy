@@ -46,6 +46,7 @@ export class OrderComponent implements OnInit {
           this.redirecting.redirect('/user_orders/1', {delete: true})
         }, (error) => {
           console.log(error.error.message)
+          this.displayError(error.error.message)
         })
       } else {
         this.userFromOrderRequest().then((response: any) => {
