@@ -26,11 +26,6 @@ export class RedirectingService {
     this.router.routeReuseStrategy.shouldReuseRoute = function() {
       return false;
     };
-    // this.baseUrl = this.router.url.split('?')[0]
-    // this.route.queryParams.subscribe((params) => {
-    //   this.queryParams = params
-    //   console.log(this.queryParams)
-    // })
   }
 
   getBaseUrl(){
@@ -85,5 +80,9 @@ export class RedirectingService {
 
   getRouter(){
     return this.router
+  }
+
+  reload(){
+    window.location.reload()
   }
 }

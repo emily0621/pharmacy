@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
 })
 export class DynamicComponentService {
 
-  data: Array<any>
+  data: Array<any> = new Array<any>()
   makeOrder: boolean = false
   makeOrderChange: Subject<boolean> = new Subject<boolean>();
 
@@ -27,6 +27,8 @@ export class DynamicComponentService {
   }
 
   clearData(){
-    this.data = new Array()
+    this.data.length = 0
+    console.log("DATA AFTER CLEAR:", this.data)
+    this.toggleMakeOrder()
   }
 }

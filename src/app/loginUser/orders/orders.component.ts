@@ -107,6 +107,6 @@ export class OrdersComponent implements OnInit {
   }
 
   newOrder(){
-    this.redirecting.redirect('/shopping_cart', null)
+    this.redirecting.redirectWithReload('/shopping_cart', null)
   }
 }

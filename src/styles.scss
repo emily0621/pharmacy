@@ -78,6 +78,10 @@ a {
     text-decoration: none;
 }
 
+select::-webkit-scrollbar {
+  display: none;
+}
+
 .base_page {
     text-align: center;
     .base_title {

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, ComponentRef, EventEmitter, HostListener, Injector, OnChanges, OnInit, Output, SimpleChanges, Type, ViewChild } from '@angular/core';
+import { Component, ComponentRef, EventEmitter, HostListener, Injector, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, Type, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
 import { DynamicComponentService } from 'src/app/dynamic-component.service';
@@ -11,7 +11,7 @@ import { InputValuesIntoSimpleMedicine, SimpleMedicineComponent } from '../medic
   templateUrl: './order-medicine.component.html',
   styleUrls: ['./order-medicine.component.scss']
 })
-export class OrderMedicineComponent implements OnInit {
+export class OrderMedicineComponent implements OnInit{
 
   @ViewChild(InputFieldComponent) input: InputFieldComponent
 
@@ -19,7 +19,6 @@ export class OrderMedicineComponent implements OnInit {
   medicineInjector: Injector
 
   id: number
-  @Output()
   checkedMedicine: boolean = false
   count: number
 
@@ -38,6 +37,7 @@ export class OrderMedicineComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.checkedMedicine = false
     this.medicineById().then((response: any) => {
       this.medicineComponent = SimpleMedicineComponent
       this.medicineInjector = Injector.create([{provide: InputValuesIntoSimpleMedicine,
@@ -51,7 +51,12 @@ export class OrderMedicineComponent implements OnInit {
     })
   }
 
+  changeSelect(){
+    this.checkedMedicine = !this.checkedMedicine
+  }
+
   fillInDynamicComponent(){
+    console.log('id: ', this.id, " checked: ", this.checkedMedicine)
     if (this.checkedMedicine) {
       this.dynamicComponentService.addData({id: this.id, count: this.input.numberValue()})
     }
