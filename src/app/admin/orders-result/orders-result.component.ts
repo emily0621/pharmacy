@@ -35,6 +35,7 @@ export class OrdersResultComponent implements OnInit {
   ) {
     this.route.params.subscribe((param: any) => {
       this.redirecting.initPages(param.page)
+      this.redirecting.baseUrl = this.redirecting.getRouter().url.split('?')[0]
     })
   }
 
@@ -65,6 +66,7 @@ export class OrdersResultComponent implements OnInit {
   resolveParams(){
     return this.route.queryParams.subscribe((params: any) => {
       console.log(params)
+      this.redirecting.queryParams = params
       if (params['date']) this.date = this.asArray(params['date'])
       if (params['username']) this.username = this.asArray(params['username'])
       if (params['medicine']) this.medicine = this.asArray(params['medicine'])
