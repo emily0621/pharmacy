@@ -19,7 +19,7 @@ import { NavComponent } from './components/nav/nav.component';
 import { InformationFieldComponent } from './components/information-field/information-field.component';
 import { User } from './user';
 import { AuthService } from './auth.service';
-import { InputValuesIntoSimpleMedicine, MainPageComponent} from './guest/main-page/main-page.component';
+import { MainPageComponent} from './guest/main-page/main-page.component';
 import { SimpleMedicineComponent } from './components/medicine/simple-medicine/simple-medicine.component';
 import { ProductsComponent } from './guest/products/products.component';
 import { ChangePasswordComponent } from './loginUser/change-password/change-password.component';
@@ -37,6 +37,8 @@ import { OrderMedicineComponent } from './components/order-medicine/order-medici
 import { ShoppingCartComponent } from './loginUser/shopping-cart/shopping-cart.component';
 import { OrderComponent } from './loginUser/order/order.component';
 import { FullOrderInformationComponent } from './components/full-order-information/full-order-information.component';
+import { SocketComponent } from './socket/socket.component';
+import { MessageComponent } from './components/message/message.component';
 
 
 @NgModule({
@@ -71,6 +73,8 @@ import { FullOrderInformationComponent } from './components/full-order-informati
     ShoppingCartComponent,
     OrderComponent,
     FullOrderInformationComponent,
+    SocketComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,

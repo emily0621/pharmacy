@@ -22,6 +22,7 @@ import { OrdersComponent } from './loginUser/orders/orders.component';
 import { OrderMedicineComponent } from './components/order-medicine/order-medicine.component';
 import { ShoppingCartComponent } from './loginUser/shopping-cart/shopping-cart.component';
 import { OrderComponent } from './loginUser/order/order.component';
+import { SocketComponent } from './socket/socket.component';
 
 const routes: Routes = [
   {path: 'not_found', component: NotFoundComponent},
@@ -39,7 +40,8 @@ const routes: Routes = [
   {path: 'test_route', component: OrderMedicineComponent},
   {path: 'user_orders', component: OrdersComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}},
   {path: 'shopping_cart', component: ShoppingCartComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser]}},
-  {path: 'order_page/:id', component: OrderComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}}
+  {path: 'order_page/:id', component: OrderComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}},
+  {component: SocketComponent, canActivate: [RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}}
 ];
 
 @NgModule({

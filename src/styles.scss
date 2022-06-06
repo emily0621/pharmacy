@@ -266,3 +266,17 @@ app-order-medicine{
     gap: 20px;
   }
 }
+
+app-socket{
+  width: 100%;
+  position: fixed;
+  display: flex;
+  bottom: 35px;
+  justify-content: flex-end;
+  margin: auto;
+  padding-right: 50px;
+}
+
+#messages{
+  overflow-y: scroll;
+}
