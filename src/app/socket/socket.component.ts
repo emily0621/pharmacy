@@ -34,6 +34,7 @@ export class SocketComponent implements OnInit {
   ) {
     this.webSocketService.listen('send message').subscribe((data: any) => {
       this.messagesInChat.push(data)
+      console.log('received message: ', data)
     })
   }
 
