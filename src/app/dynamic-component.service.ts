@@ -27,6 +27,8 @@ export class DynamicComponentService {
   }
 
   clearData(){
+    this.data = new Array()
+    console.log(this.data)
     this.data.length = 0
     console.log("DATA AFTER CLEAR:", this.data)
     this.toggleMakeOrder()

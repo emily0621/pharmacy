@@ -1,0 +1,16 @@
+@import 'src/styles.scss';
+
+p{
+  padding: 10px;
+  @include mainText(15px);
+  width: 200px;
+  border-radius: 20px;
+}
+
+.own_message{
+  background-color: $hoverColor;
+}
+
+.received_message{
+  background-color: $mainColor;
+}

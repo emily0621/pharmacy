@@ -277,6 +277,19 @@ app-order-medicine{
   }
 }
 
+app-socket{
+  width: 100%;
+  position: fixed;
+  display: flex;
+  bottom: 35px;
+  justify-content: flex-end;
+  margin: auto;
+  padding-right: 50px;
+}
+
+#messages{
+  overflow-y: scroll;
+}
 app-full-order-information{
   @include border(5px, 50px);
   background-color: $lightColor;
@@ -328,4 +341,3 @@ app-not-found{
   justify-content: center;
   align-items: center;
 }
-

@@ -1,0 +1,80 @@
+@import 'src/styles.scss';
+
+.chat_icon{
+  border-radius: 50%;
+  background-color: $mainColor;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  display: flex;
+  box-shadow: 0px 10px 8px rgba(0, 0, 0, 0.5);
+  -webkit-appearance: none;
+
+  img{
+    display: flex;
+    margin: auto;
+    width: 20px;
+  }
+}
+
+#chat{
+  margin: 30px;
+}
+
+#main_chat{
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  height: 550px;
+  background-color: $lightColor;
+  border-radius: 3%;
+  padding: 20px;
+  justify-content: space-between;
+
+  #head{
+    @include mainText(25px);
+    background-color: $mainColor;
+    padding: 10px;
+    border-radius: 30px;
+  }
+
+  #send_message{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 20px;
+
+    app-input-field{
+      margin: 0;
+    }
+  }
+}
+
+#messages::-webkit-scrollbar {
+  display: none;  /* Safari and Chrome */
+}
+
+.chat_icon:hover{
+  @include addTransition();
+  background-color: $hoverColor;
+}
+
+.chat_icon:active{
+  @include addTransition();
+  background-color: $lightColor;
+}
+
+#messages{
+  height: 350px;
+  padding: 10px;
+}
+
+.own_message{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.received_message{
+  display: flex;
+  justify-content: flex-start;
+}

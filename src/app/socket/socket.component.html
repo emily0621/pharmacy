@@ -1,0 +1,24 @@
+<div id="chat" *ngIf="role != 'guest'">
+  <div class="chat_icon" (click)="changeChat()" *ngIf="!showChat">
+    <img src="/static/images/Message.svg">
+  </div>
+  <div *ngIf="showChat" id="main_chat">
+    <div id="head">Support</div>
+    <div id="messages">
+      <ng-container *ngFor="let message of messages">
+        <div [class]="message.class">
+          <ng-container *ngComponentOutlet="component; injector: message.injector" [ngClass]="'test_class'"></ng-container>
+        </div>
+      </ng-container>
+    </div>
+    <div id="send_message">
+      <app-input-field></app-input-field>
+      <div class="chat_icon" (click)="send()">
+        <img src="/static/images/Icon2.svg">
+      </div>
+      <div class="chat_icon" (click)="changeChat()" *ngIf="showChat">
+        <img src="/static/images/Union.svg">
+      </div>
+    </div>
+  </div>
+</div>
