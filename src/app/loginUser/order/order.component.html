@@ -2,5 +2,11 @@
 <div class="base_page">
   <h3 class="base_title">Order #{{id}}</h3>
   <ng-container *ngComponentOutlet="orderComponent; injector: orderInjector"></ng-container>
+  <div class="button_list">
+    <button class="base_button" (click)="userPage()" *ngIf="role == 'provisor'">User</button>
+    <button class="base_button" (click)="cancelOrder()">Cancel order</button>
+    <button class="base_button" (click)="medicineInOrder()">Get medicine in order</button>
+  </div>
+  <ng-container [ngIf]="hasError" *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>
 </div>
 <app-footer></app-footer>

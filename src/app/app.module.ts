@@ -2,10 +2,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
 import { LoginComponent } from './guest/login/login.component';
 import { LoginNavComponent } from './components/nav/login-nav/login-nav.component';
 import { AdminNavComponent } from './components/nav/admin-nav/admin-nav.component';
@@ -21,6 +19,7 @@ import { User } from './user';
 import { AuthService } from './auth.service';
 import { MainPageComponent} from './guest/main-page/main-page.component';
 import { SimpleMedicineComponent } from './components/medicine/simple-medicine/simple-medicine.component';
+import { InputValuesIntoSimpleMedicine, SimpleMedicineComponent } from './components/medicine/simple-medicine/simple-medicine.component';
 import { ProductsComponent } from './guest/products/products.component';
 import { ChangePasswordComponent } from './loginUser/change-password/change-password.component';
 import { EditProfileComponent } from './loginUser/edit-profile/edit-profile.component';
@@ -39,6 +38,10 @@ import { OrderComponent } from './loginUser/order/order.component';
 import { FullOrderInformationComponent } from './components/full-order-information/full-order-information.component';
 import { SocketComponent } from './socket/socket.component';
 import { MessageComponent } from './components/message/message.component';
+import { MedicineInOrderComponent } from './loginUser/medicine-in-order/medicine-in-order.component';
+import { UserPageComponent } from './admin/user-page/user-page.component';
+import { FindOrderComponent } from './admin/find-order/find-order.component';
+import { OrdersResultComponent } from './admin/orders-result/orders-result.component';
 
 
 @NgModule({
@@ -75,6 +78,10 @@ import { MessageComponent } from './components/message/message.component';
     FullOrderInformationComponent,
     SocketComponent,
     MessageComponent
+    MedicineInOrderComponent,
+    UserPageComponent,
+    FindOrderComponent,
+    OrdersResultComponent,
   ],
   imports: [
     BrowserModule,

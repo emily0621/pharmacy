@@ -8,8 +8,8 @@
     </div>
 </div>
 <div class="button_list">
-  <button class="base_button" *ngIf="hasPrev" (click)="getPrevPage()">Previous page</button>
-  <button class="base_button" *ngIf="hasNext" (click)="getNextPage()">Next page</button>
+  <button class="base_button" *ngIf="redirecting.hasPrev" (click)="redirecting.previousPage()">Previous page</button>
+  <button class="base_button" *ngIf="redirecting.hasNext" (click)="redirecting.nextPage()">Next page</button>
 </div>
 <ng-container [ngIf]="hasError" *ngComponentOutlet="errorComponent; injector: errorInjector"></ng-container>
 <app-footer></app-footer>

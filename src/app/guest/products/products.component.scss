@@ -1,9 +1,5 @@
 @import 'src/styles.scss';
 
-select::-webkit-scrollbar {
-  display: none; /* for Chrome, Safari, and Opera */
-}
-
 .filter{
   display: flex;
   flex-direction: column;

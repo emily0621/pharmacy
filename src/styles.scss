@@ -22,7 +22,9 @@ body{
 
 app-login, app-registration, app-user-profile,
 app-products, app-users, app-wish-list,
-app-orders, app-shopping-cart, app-order{
+app-orders, app-shopping-cart, app-order,
+app-medicine-in-order, app-find-order,
+app-orders-result, app-not-found{
     @include base_page_style()
 }
 
@@ -76,12 +78,17 @@ a {
     text-decoration: none;
 }
 
+select::-webkit-scrollbar {
+  display: none;
+}
+
 .base_page {
     text-align: center;
     .base_title {
         @include gradientText(50px);
         margin-top: 40px;
         margin-bottom: 40px;
+        padding: 5px;
     }
 }
 .button_list{
@@ -240,6 +247,9 @@ app-short-order-information{
   flex-direction: column;
   justify-content: space-around;
   padding: 25px;
+}
+
+app-short-order-information, app-full-order-information{
   app-information-field .information_field{
     text-align: right;
   }
@@ -279,4 +289,55 @@ app-socket{
 
 #messages{
   overflow-y: scroll;
+}
+app-full-order-information{
+  @include border(5px, 50px);
+  background-color: $lightColor;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 700px;
+  margin: auto;
+  padding: 40px;
+  margin-bottom: 30px;
+  app-information-field{
+    .base_label{
+      font-size: 25px;
+    }
+    .information_field{
+      font-size: 25px;
+    }
+  }
+}
+
+app-not-found{
+  .error{
+    font-size: 40px;
+  }
+}
+
+.form-check-input{
+  background-color: $hoverColor;
+  border-color: $hoverColor;
+}
+
+.form-check-input:checked{
+  background-color: $mainColor;
+  border-color: $mainColor;
+}
+
+.form-check-input:focus{
+  box-shadow: 0 0 0 0.25rem $lightColor;
+}
+
+#delete_label{
+  @include mainText(20px);
+  color: $mainColor;
+  margin-left: 10px;
+}
+
+#delete_after_check{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
