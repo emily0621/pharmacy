@@ -2,4 +2,5 @@
 
 .users{
   @extend .products;
+  column-gap: 30px;
 }

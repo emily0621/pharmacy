@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "order-medicine.component.scss"
+    ],
+    "names": [],
+    "file": "order-medicine.component.css"
+}

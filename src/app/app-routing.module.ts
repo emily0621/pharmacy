@@ -18,7 +18,6 @@ import { OrdersComponent } from './loginUser/orders/orders.component';
 import { OrderMedicineComponent } from './components/order-medicine/order-medicine.component';
 import { ShoppingCartComponent } from './loginUser/shopping-cart/shopping-cart.component';
 import { OrderComponent } from './loginUser/order/order.component';
-import { SocketComponent } from './socket/socket.component';
 import { MedicineInOrderComponent } from './loginUser/medicine-in-order/medicine-in-order.component';
 import { UserPageComponent } from './admin/user-page/user-page.component';
 import { FindOrderComponent } from './admin/find-order/find-order.component';
@@ -42,7 +41,6 @@ const routes: Routes = [
   {path: 'user_orders/:username/:page', component: OrdersComponent, canActivate:[RoleGuard], data: { roles: [Role.provisor]}},
   {path: 'shopping_cart', component: ShoppingCartComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser]}},
   {path: 'order_page/:id', component: OrderComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}},
-  {component: SocketComponent, canActivate: [RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}}
   {path: 'medicine/order/:id/:page', component: MedicineInOrderComponent, canActivate:[RoleGuard], data: { roles: [Role.loginUser, Role.provisor]}},
   {path: 'user_page/:username', component: UserPageComponent, canActivate:[RoleGuard], data: { roles: [Role.provisor]}},
   {path: 'find_order', component: FindOrderComponent, canActivate:[RoleGuard], data: { roles: [Role.provisor]}},

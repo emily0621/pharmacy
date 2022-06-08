@@ -11,11 +11,11 @@ export class WebSocketService {
   readonly url: string = 'ws://localhost:3000'
 
   constructor() {
-    this.socket = io(this.url)
+    this.socket = io(this.url, {transports: ['websocket', 'pulling', 'flashsocket']})
   }
 
   sendMessage(message: any){
-    this.emit('send message', message)
+    this.emit('message', message)
   }
 
 
@@ -28,6 +28,7 @@ export class WebSocketService {
   }
 
   emit(eventName: string, data: any){
+    console.log('emit')
     this.socket.emit(eventName, data)
   }
 }

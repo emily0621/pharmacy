@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAA;EACT,MAAM,EAAE,CAAC;EACT,SAAS,EAAE,IAAI;CAChB",
+    "sources": [
+        "short-order-information.component.scss"
+    ],
+    "names": [],
+    "file": "short-order-information.component.css"
+}

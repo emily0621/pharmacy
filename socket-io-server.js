@@ -1,28 +1,19 @@
-const { createServer } = require("http");
-const { Server } = require("socket.io");
+const path = require('path');
+const http = require('http');
+const express = require('express');
+const socketIO = require('socket.io');
 
-const httpServer = createServer();
-const io = new Server(httpServer, {
-  cors: {
-    origin: ['http://127.0.0.1:5000']
-  }
-})
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
 
-io.on("connection", (socket) => {
-  console.log('Successfully connected to ', socket.id)
-
-  socket.emit('send message', {message: 'message1 from user1', author: 'user', to: 'admin', from: 'eagerOcelot1'})
-  socket.emit('send message', {message: 'message1', author: 'admin', to: 'eagerOcelot1', from: 'admin'})
-  socket.emit('send message', {message: 'message1 from user2', author: 'user', to: 'admin', from: 'ferventRice9'})
-  socket.emit('send message', {message: 'message2', author: 'admin', to: 'eagerOcelot1', from: 'admin'})
-  socket.emit('send message', {message: 'message3', author: 'admin', to: 'ferventRice9', from: 'admin'})
-  socket.emit('send message', {message: 'message2 from user1', author: 'user', to: 'admin', from: 'eagerOcelot1'})
-
-  socket.onAny((event, message) => {
-    socket.emit(event, message)
+io.on('connection', socket => {
+  console.log('connected')
+  socket.on('message', (message) => {
+    io.emit('message', message);
   });
 });
 
-httpServer.listen(3000, () => {
-  console.log('Port 3000')
-});
+const PORT = process.env.PORT || 3000;
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));

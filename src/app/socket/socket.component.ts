@@ -19,9 +19,10 @@ export class SocketComponent implements OnInit {
 
   role: Role = Role.guest
   author: string
+  username: string
 
   showChat = false
-  component:  Type<any>
+  component:  Type<any> = MessageComponent
   messagesInChat: Array<any> = new Array()
   messages: Array<any> = new Array()
 
@@ -32,9 +33,11 @@ export class SocketComponent implements OnInit {
     private webSocketService: WebSocketService,
     private dynamicComponentService: DynamicComponentService
   ) {
-    this.webSocketService.listen('send message').subscribe((data: any) => {
+    this.webSocketService.listen('message').subscribe((data: any) => {
+      console.log(this.author, this.username, this.role)
       this.messagesInChat.push(data)
       console.log('received message: ', data)
+      this.messageToChat(data)
     })
   }
 
@@ -46,18 +49,30 @@ export class SocketComponent implements OnInit {
     }
   }
 
+  messageToChat(message: any){
+    console.log('message ', message)
+    if (message.to == this.username || message.from == this.username){
+      let classMessage
+      if ((message.author == 'admin' && this.role == Role.provisor) ||
+        (message.author != 'admin' && this.role != Role.provisor)) classMessage = 'own_message'
+      else classMessage = 'received_message'
+        const messageInjector = Injector.create([{provide: Message, useValue: {message: message, classMessage: classMessage}}], this.injector)
+        this.messages.push({injector: messageInjector, class: classMessage})
+      }
+    console.log('messages ', this.messages)
+  }
+
   changeChat(){
     if (this.showChat == false){
       this.auth.checkUser().then((user: User) => {
         this.role = user.role
         if (this.role == Role.provisor){
-          this.author = 'admin'
-          this.prepareMessages('admin')
+          this.author = this.username = 'admin'
         }
         else {
           this.author = 'user'
           this.getUserRequest().then((user: any) => {
-            this.prepareMessages(user.username)
+            this.username = user.username
           })
         }
       })
@@ -65,58 +80,22 @@ export class SocketComponent implements OnInit {
     this.showChat = !this.showChat
   }
 
-  prepareMessages(toUser: string){
-    this.component = MessageComponent
-    this.messages = new Array()
-    console.log(this.messagesInChat)
-    this.messagesInChat.forEach((message: any) => {
-      if (message.to == toUser || message.from == toUser){
-        let classMessage
-        if ((message.author == 'admin' && this.role == Role.provisor) ||
-          (message.author != 'admin' && this.role != Role.provisor)) classMessage = 'own_message'
-          else classMessage = 'received_message'
-          const messageInjector = Injector.create([{provide: Message, useValue: {message: message, classMessage: classMessage}}], this.injector)
-          this.messages.push({injector: messageInjector, class: classMessage})
-        }
-      })
-  }
-
   send(){
-    this.auth.checkUser().then(() => {
-      const text = this.input.value
-      let messageObject
-      if (this.author == 'user') {
-        this.getUserRequest().then((user: any) => {
-          messageObject = {message: text, author: this.author, to: 'admin', from: user.username}
-          console.log(messageObject)
-          this.messageToWebSocket(text, 'admin', user.username)
-          this.sendMessage(messageObject)
-        })
-      }
-      else {
+    const text = this.input.value
+    this.webSocketService.sendMessage('message')
+    if (this.author == 'user'){
+      this.webSocketService.sendMessage({message: text, author: this.author, to: 'admin', from: this.username})
+    } else if(this.author == 'admin'){
         this.dynamicComponentService.clearData()
         console.log(this.dynamicComponentService.data)
         this.dynamicComponentService.toggleMakeOrder()
         console.log(this.dynamicComponentService.getData())
         this.dynamicComponentService.data.forEach((message) => {
-          messageObject = {message: text, author: this.author, to: message.from, from: 'admin'}
-          this.messageToWebSocket(text, message.from, 'admin')
-        })
-        this.sendMessage(messageObject)
-        console.log(messageObject)
-      }
-    })
-  }
-
-  sendMessage(message: any){
-    const messageInjector = Injector.create([{provide: Message, useValue: {message: message, classMessage: 'own_message'}}], this.injector)
-    this.messages.push({injector: messageInjector, class: 'own_message'})
+          const messageObject = {message: text, author: this.author, to: message.from, from: 'admin'}
+          this.webSocketService.sendMessage(messageObject)
+      })
+    }
     this.input.value = null
-  }
-
-  messageToWebSocket(text: string, toUser: string, fromUser: string){
-    const message = {message: text, author: this.author, to: toUser, from: fromUser}
-    this.webSocketService.sendMessage(message)
   }
 
   getUserRequest(){
