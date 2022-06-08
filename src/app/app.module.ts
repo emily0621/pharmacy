@@ -19,7 +19,6 @@ import { User } from './user';
 import { AuthService } from './auth.service';
 import { MainPageComponent} from './guest/main-page/main-page.component';
 import { SimpleMedicineComponent } from './components/medicine/simple-medicine/simple-medicine.component';
-import { InputValuesIntoSimpleMedicine} from './components/medicine/simple-medicine/simple-medicine.component';
 import { ProductsComponent } from './guest/products/products.component';
 import { ChangePasswordComponent } from './loginUser/change-password/change-password.component';
 import { EditProfileComponent } from './loginUser/edit-profile/edit-profile.component';
